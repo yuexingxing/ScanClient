@@ -41,6 +41,8 @@ public class LoginActivity extends Activity {
 			public void callback(boolean success, String message, Object data) {
 				// TODO Auto-generated method stub
 				
+				MyApplication.mUserInfo.setName("admin");
+				
 				Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
 				startActivity(intent);
 				finish();

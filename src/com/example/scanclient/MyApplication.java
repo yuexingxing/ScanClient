@@ -2,6 +2,9 @@ package com.example.scanclient;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import com.example.scanclient.db.DBHelper;
+import com.example.scanclient.info.UserInfo;
 import com.example.scanclient.util.CommandTools;
 import okhttp3.OkHttpClient;
 import de.greenrobot.event.EventBus;
@@ -10,6 +13,8 @@ import android.app.Application;
 import android.os.Message;
 
 public class MyApplication extends Application{
+	
+	public static UserInfo mUserInfo = new UserInfo();
 
 	public static MyApplication instance;
 	public List<Activity> activityList = new LinkedList<Activity>();
@@ -22,6 +27,9 @@ public class MyApplication extends Application{
 		instance = this;
 		mOkHttpClient = new OkHttpClient();
 
+		new DBHelper(this);
+		DBHelper.SQLiteDBHelper.getWritableDatabase();
+		
 		if (eventBus == null) {
 			eventBus = EventBus.getDefault();
 			eventBus.register(this);

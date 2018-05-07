@@ -2,12 +2,8 @@ package com.example.scanclient.fragment;
 
 import com.example.scanclient.R;
 import com.example.scanclient.activity.OrderInqueryActivity;
-import com.example.scanclient.util.CommandTools;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 
 /**
  * ≤È—Ø

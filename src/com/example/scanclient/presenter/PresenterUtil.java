@@ -1,8 +1,14 @@
 package com.example.scanclient.presenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
+
+import com.example.scanclient.info.BillInfo;
 import com.example.scanclient.util.API;
 import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.OkHttpUtil;
@@ -68,7 +74,7 @@ public class PresenterUtil {
 	}
 	
 	/**
-	 * 订单查询
+	 * 订单列表查询
 	 * @param context
 	 * @param callback
 	 */
@@ -85,9 +91,57 @@ public class PresenterUtil {
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PupQueryOrderHeaderResponse").toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PupQueryOrderHeaderResult").toString());
-					String msg = jsonObject.optString("OrderTitle");
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderTitle").toString());
+					
+					List<BillInfo> dataList = new ArrayList<BillInfo>();
+					BillInfo info = new BillInfo();
+					info.setBillcode(jsonObject.optString("OrderID"));
+					info.setScanTime(jsonObject.optString("OrderDate"));
+					info.setStatus(jsonObject.optString("Status"));
+					info.setCusBillcode(jsonObject.optString("CrtBillNo"));
+					
+					dataList.add(info);
+					
+					callback.callback(success, message, dataList);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	/**
+	 * 订单详情查询
+	 * @param context
+	 * @param callback
+	 */
+	public static void PodQueryOrderDetail(Context context, String OrderID, String UserID, String DvcID, final ObjectCallback callback){
 
-					callback.callback(success, message, msg);
+		SoapUtil.post(API.PodQueryOrderDetail, XmlUtil.PodQueryOrderDetail(OrderID, UserID, DvcID), new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+
+				JSONObject jsonObject;
+				try {
+
+					jsonObject = new JSONObject(data.toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResponse").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResult").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
+					JSONArray jsonArray = new JSONArray(jsonObject.optJSONArray("OrderDetailEty").toString());
+					
+					CommandTools.showToast(jsonArray.toString());
+					List<BillInfo> dataList = new ArrayList<BillInfo>();
+//					BillInfo info = new BillInfo();
+//					info.setBillcode(jsonObject.optString("OrderID"));
+//					info.setScanTime(jsonObject.optString("OrderDate"));
+//					info.setStatus(jsonObject.optString("Status"));
+//					info.setCusBillcode(jsonObject.optString("CrtBillNo"));
+//					
+//					dataList.add(info);
+					
+					callback.callback(success, message, dataList);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

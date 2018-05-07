@@ -7,4 +7,6 @@ public class API {
 	public static String HelloWorld = "HelloWorld";//²âÊÔ½Ó¿Ú
 	public static String RFLogin = "RFLogin";//µÇÂ¼
 	public static String PupQueryOrderHeader = "PupQueryOrderHeader";//¶©µ¥²éÑ¯
+	public static String PodQueryOrderDetail = "PodQueryOrderDetail";//¶©µ¥ÏêÇé²éÑ¯
+	 
 }

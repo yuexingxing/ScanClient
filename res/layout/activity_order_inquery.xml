@@ -18,10 +18,11 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/order_inquery_billcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="11203609" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,8 +52,8 @@
             android:onClick="inquery"
             android:text="查询" />
     </LinearLayout>
-    
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center_vertical"
@@ -70,8 +71,8 @@
             android:id="@+id/order_inquery_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" 
-            android:text="0"/>
+            android:layout_weight="1"
+            android:text="0" />
 
         <Button
             android:layout_width="wrap_content"
@@ -79,24 +80,53 @@
             android:onClick="del"
             android:text="删除" />
     </LinearLayout>
-    
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/item_layout_inquery_order" />
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                layout="@layout/listview_public" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal" >
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/item_layout_inquery_order" />
-
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            layout="@layout/listview_public" />
+            android:layout_marginLeft="20dp"
+            android:onClick="toBack"
+            android:text="返回" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:onClick="toDetail"
+            android:text="明细" />
     </LinearLayout>
 
 </LinearLayout>

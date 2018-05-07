@@ -121,7 +121,8 @@ public class CommandTools {
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		try {
 			String sn = telephonemanage.getDeviceId();
-			return sn;
+//			return sn;
+			return "122222222222312";
 		} catch (Exception e) {
 			Log.e("MIME", e.getMessage());
 			return "00000000000";

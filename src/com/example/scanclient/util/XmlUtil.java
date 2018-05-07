@@ -55,4 +55,22 @@ public class XmlUtil {
 
 		return soapXML;  
 	}  
+	
+	public static String PodQueryOrderDetail(String OrderID, String UserID, String DvcID){  
+
+		String soapXML = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"  
+				+"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"  
+				+"<soap:Body>"  
+				+"<PodQueryOrderDetail xmlns=\"http://tempuri.org/\">"  
+				+"<para>"
+				+"<OrderID>"+OrderID+"</OrderID>"  
+				+"<UserID>"+UserID+"</UserID>"  
+				+"<DvcID>"+DvcID+"</DvcID>"  
+				+"</para>"
+				+"</PodQueryOrderDetail>"  
+				+" </soap:Body>"  
+				+"</soap:Envelope>";  
+
+		return soapXML;  
+	}  
 }

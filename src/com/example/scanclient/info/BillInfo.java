@@ -6,6 +6,8 @@ public class BillInfo {
 	private String status;
 	private String scanTime;
 	private String cusBillcode;
+	private boolean flag;
+	
 	public String getBillcode() {
 		return billcode;
 	}
@@ -29,5 +31,11 @@ public class BillInfo {
 	}
 	public void setCusBillcode(String cusBillcode) {
 		this.cusBillcode = cusBillcode;
+	}
+	public boolean isFlag() {
+		return flag;
+	}
+	public void setFlag(boolean flag) {
+		this.flag = flag;
 	}
 }
