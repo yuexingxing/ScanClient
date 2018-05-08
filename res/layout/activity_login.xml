@@ -64,10 +64,11 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/login_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="admin" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,10 +85,12 @@
             android:textSize="15sp" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/login_psd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="123"
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <LinearLayout

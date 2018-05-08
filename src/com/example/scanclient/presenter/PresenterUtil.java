@@ -8,7 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
 
+import com.example.scanclient.db.dao.SysCodeDao;
 import com.example.scanclient.info.BillInfo;
+import com.example.scanclient.info.SysCode;
 import com.example.scanclient.util.API;
 import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.OkHttpUtil;
@@ -63,9 +65,27 @@ public class PresenterUtil {
 
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("RFLoginResponse").toString());
-					String msg = jsonObject.optString("RFLoginResult");
+					JSONObject jsonObjectResult = new JSONObject(jsonObject.optJSONObject("RFLoginResult").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObject.optString("flag");
+					if(!flag.equals("1")){
+						
+						String msg = jsonObject.optString("msg");
+						CommandTools.showToast(msg);
+						return;
+					}
+					
+					jsonObject = new JSONObject(jsonObjectResult.optJSONObject("User").toString());
+					
+					SysCode sysCode = new SysCode();
+					sysCode.setID(jsonObject.optString("UserID"));
+					sysCode.setName(jsonObject.optString("ChnName"));
+					sysCode.setType(jsonObject.optString("OrgID"));
+					
+					SysCodeDao sysCodeDao = new SysCodeDao();
+					sysCodeDao.addData(sysCode);
 
-					callback.callback(success, message, msg);
+					callback.callback(success, message, jsonObject);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}

@@ -122,7 +122,7 @@ public class CommandTools {
 		try {
 			String sn = telephonemanage.getDeviceId();
 //			return sn;
-			return "122222222222312";
+			return "631008030699";
 		} catch (Exception e) {
 			Log.e("MIME", e.getMessage());
 			return "00000000000";
