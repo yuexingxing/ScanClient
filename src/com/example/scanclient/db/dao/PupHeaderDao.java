@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.scanclient.db.DBHelper;
+import com.example.scanclient.info.OrderInfo;
 import com.example.scanclient.info.PupDetail;
 import com.example.scanclient.info.PupHeader;
 import com.example.scanclient.info.SysUser;
@@ -11,6 +12,7 @@ import com.example.scanclient.info.SysUser;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class PupHeaderDao {
 
@@ -26,7 +28,7 @@ public class PupHeaderDao {
 	 * @param info
 	 * @return
 	 */
-	public boolean addData(PupHeader info) {
+	public boolean addData(OrderInfo info) {
 
 		boolean flag = false;
 		try {
@@ -46,6 +48,7 @@ public class PupHeaderDao {
 			db.insert(DBHelper.TABLE_PupHeader, null, cv);
 
 			db.setTransactionSuccessful();
+			Log.v("dbdao", "TABLE_PupHeader---addData成功");
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -58,11 +61,11 @@ public class PupHeaderDao {
 	 * 删除数据
 	 * @param info
 	 */
-	public void deleteById(PupDetail info){
+	public void deleteById(String id){
 
 		String sql = " delete from " + DBHelper.TABLE_PupHeader
 				+ " where " 
-				+ DBHelper.ID + " = '" + info.getID() + "'";
+				+ DBHelper.OrderID + " = '" + id + "'";
 
 		try{
 			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
@@ -76,9 +79,9 @@ public class PupHeaderDao {
 	 * @param id
 	 * @return
 	 */
-	public List<PupHeader> selectAllData() {
+	public List<OrderInfo> selectAllData() {
 
-		List<PupHeader> list = new ArrayList<PupHeader>();
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
 
 		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
 		String sql = "select * from " + DBHelper.TABLE_PupHeader;
@@ -87,7 +90,7 @@ public class PupHeaderDao {
 
 		while(cursor.moveToNext()) {
 
-			PupHeader info = new PupHeader();
+			OrderInfo info = new OrderInfo();
 			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
 			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
 			info.setOrderDate(cursor.getString(cursor.getColumnIndex(DBHelper.OrderDate)));
@@ -106,6 +109,31 @@ public class PupHeaderDao {
 		return list;
 	}
 
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public int checkData(String id) {
+
+		int count = -1;
+		Cursor cursor = null;
+		String sql = "select * from " + DBHelper.TABLE_PupHeader + " where " + DBHelper.OrderID + "  = '" + id + "'";
+		try{
+
+			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+			cursor = db.rawQuery(sql, null);
+			count = cursor.getCount();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(cursor != null){
+				cursor.close();
+			}
+		}
+
+		return count;
+	}
 
 	/**
 	 * 清空表

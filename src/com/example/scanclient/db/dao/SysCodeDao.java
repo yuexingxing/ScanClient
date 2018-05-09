@@ -96,6 +96,32 @@ public class SysCodeDao {
 
 		return list;
 	}
+	
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public int checkData(String id) {
+
+		int count = -1;
+		Cursor cursor = null;
+		String sql = "select * from " + DBHelper.TABLE_SysCode + " where " + DBHelper.ID + "  = '" + id + "'";
+		try{
+
+			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+			cursor = db.rawQuery(sql, null);
+			count = cursor.getCount();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(cursor != null){
+				cursor.close();
+			}
+		}
+
+		return count;
+	}
 
 	/**
 	 * 清空表

@@ -9,6 +9,8 @@ import com.example.scanclient.info.SysCode;
 import com.example.scanclient.presenter.PresenterUtil;
 import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.OkHttpUtil.ObjectCallback;
+import com.example.scanclient.view.SingleItemDialog;
+import com.example.scanclient.view.SingleItemDialog.SingleItemCallBack;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import android.os.Bundle;
@@ -17,9 +19,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -28,11 +32,13 @@ import android.widget.EditText;
  *
  */
 public class LoginActivity extends Activity {
-
+	
+	@ViewInject(R.id.login_btn_name) Button btnName;
 	@ViewInject(R.id.login_id) EditText edtId;
 	@ViewInject(R.id.login_psd) EditText edtPsd;
 	
 	List<SysCode> listSysCode = new ArrayList<SysCode>();
+	List<String> listSysCodeName = new ArrayList<String>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +58,23 @@ public class LoginActivity extends Activity {
 		int len = listSysCode.size();
 		for(int i=0; i<len; i++){
 			
-			System.out.println(listSysCode.get(i).getName());
+			listSysCodeName.add(listSysCode.get(i).getName());
+			Log.v("zd", listSysCode.get(i).getName());
 		}
+	}
+	
+	public void selMan(View v){
+		
+		SingleItemDialog.showDialog(this, "ÇëÑ¡Ôñ", false, listSysCodeName, new SingleItemCallBack() {
+			
+			@Override
+			public void callback(int pos) {
+				// TODO Auto-generated method stub
+				
+				btnName.setText(listSysCode.get(pos).getName());
+				edtId.setText(listSysCode.get(pos).getID());
+			}
+		});
 	}
 
 	public void login(View v){

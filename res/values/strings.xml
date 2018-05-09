@@ -7,5 +7,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_scan_fragment">ScanFragment</string>
     <string name="title_activity_order_inquery">OrderInqueryActivity</string>
+    <string name="title_activity_ti_huo_detail">TiHuoDetailActivity</string>
 
 </resources>

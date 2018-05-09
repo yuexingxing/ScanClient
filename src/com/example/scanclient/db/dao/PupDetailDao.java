@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.scanclient.db.DBHelper;
+import com.example.scanclient.info.OrderInfo;
 import com.example.scanclient.info.PupDetail;
 import com.example.scanclient.info.SysUser;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class PupDetailDao {
 
@@ -25,7 +27,7 @@ public class PupDetailDao {
 	 * @param info
 	 * @return
 	 */
-	public boolean addData(PupDetail info) {
+	public boolean addData(OrderInfo info) {
 
 		boolean flag = false;
 		try {
@@ -47,6 +49,8 @@ public class PupDetailDao {
 			db.insert(DBHelper.TABLE_PupDetail, null, cv);
 
 			db.setTransactionSuccessful();
+			
+			Log.v("dbdao", "TABLE_PupDetail---addData成功");
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -59,11 +63,11 @@ public class PupDetailDao {
 	 * 删除数据
 	 * @param info
 	 */
-	public void deleteById(PupDetail info){
+	public void deleteById(String id){
 
 		String sql = " delete from " + DBHelper.TABLE_PupDetail
 				+ " where " 
-				+ DBHelper.ID + " = '" + info.getID() + "'";
+				+ DBHelper.OrderID + " = '" + id + "'";
 
 		try{
 			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
@@ -77,9 +81,9 @@ public class PupDetailDao {
 	 * @param id
 	 * @return
 	 */
-	public List<PupDetail> selectAllData() {
+	public List<OrderInfo> selectAllData() {
 
-		List<PupDetail> list = new ArrayList<PupDetail>();
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
 
 		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
 		String sql = "select * from " + DBHelper.TABLE_PupDetail;
@@ -88,7 +92,7 @@ public class PupDetailDao {
 
 		while(cursor.moveToNext()) {
 
-			PupDetail info = new PupDetail();
+			OrderInfo info = new OrderInfo();
 			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
 			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
 			info.setCargoID(cursor.getString(cursor.getColumnIndex(DBHelper.CargoID)));
@@ -108,6 +112,45 @@ public class PupDetailDao {
 
 		return list;
 	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public List<OrderInfo> selectDataById(String orderId) {
+
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
+
+		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+		String sql = "select * from " + DBHelper.TABLE_PupDetail
+				+ " where " 
+				+ DBHelper.OrderID + " = '" + orderId + "'";;
+
+		Cursor cursor = db.rawQuery(sql, null);
+
+		while(cursor.moveToNext()) {
+
+			OrderInfo info = new OrderInfo();
+			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
+			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
+			info.setCargoID(cursor.getString(cursor.getColumnIndex(DBHelper.CargoID)));
+			info.setCargoName(cursor.getString(cursor.getColumnIndex(DBHelper.CargoName)));
+			info.setModel(cursor.getString(cursor.getColumnIndex(DBHelper.Model)));
+			info.setBatchNo(cursor.getString(cursor.getColumnIndex(DBHelper.BatchNo)));
+			info.setCount(cursor.getString(cursor.getColumnIndex(DBHelper.Count)));
+			info.setWeight(cursor.getString(cursor.getColumnIndex(DBHelper.Weight)));
+			info.setRemark(cursor.getString(cursor.getColumnIndex(DBHelper.Remark)));
+
+			list.add(info);
+		}
+
+		if(cursor != null){
+			cursor.close();
+		}
+
+		return list;
+	}
+
 
 
 	/**
