@@ -32,6 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <TextView
@@ -42,14 +43,23 @@
             android:text="订单客户:"
             android:textSize="15sp" />
 
-        <Button
+        <TextView
             android:id="@+id/login_btn_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:onClick="selMan"
-            android:text="Button" />
+            android:hint="请选择账号"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:onClick="selMan"
+            android:src="@drawable/icon_conner_down" />
+
     </LinearLayout>
 
     <LinearLayout

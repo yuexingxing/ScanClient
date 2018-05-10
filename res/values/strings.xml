@@ -8,5 +8,6 @@
     <string name="title_activity_scan_fragment">ScanFragment</string>
     <string name="title_activity_order_inquery">OrderInqueryActivity</string>
     <string name="title_activity_ti_huo_detail">TiHuoDetailActivity</string>
+    <string name="title_activity_ti_huo_detail_scan">TiHuoDetailScanActivity</string>
 
 </resources>

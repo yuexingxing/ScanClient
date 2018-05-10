@@ -8,5 +8,6 @@ public class API {
 	public static String RFLogin = "RFLogin";//登录
 	public static String PupQueryOrderHeader = "PupQueryOrderHeader";//订单查询
 	public static String PodQueryOrderDetail = "PodQueryOrderDetail";//订单详情查询
+	public static String PupUpload = "PupUpload";//提货扫描上传
 	 
 }

@@ -75,26 +75,27 @@ public final class R {
     public static final class drawable {
         public static final int btn_gray=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int img_back=0x7f020002;
-        public static final int img_background=0x7f020003;
-        public static final int progress_custom_bg=0x7f020004;
-        public static final int shape_rec_black=0x7f020005;
-        public static final int spinner_0=0x7f020006;
-        public static final int spinner_1=0x7f020007;
-        public static final int spinner_10=0x7f020008;
-        public static final int spinner_11=0x7f020009;
-        public static final int spinner_2=0x7f02000a;
-        public static final int spinner_3=0x7f02000b;
-        public static final int spinner_4=0x7f02000c;
-        public static final int spinner_5=0x7f02000d;
-        public static final int spinner_6=0x7f02000e;
-        public static final int spinner_7=0x7f02000f;
-        public static final int spinner_8=0x7f020010;
-        public static final int spinner_9=0x7f020011;
-        public static final int title_background=0x7f020012;
+        public static final int icon_conner_down=0x7f020002;
+        public static final int img_back=0x7f020003;
+        public static final int img_background=0x7f020004;
+        public static final int progress_custom_bg=0x7f020005;
+        public static final int shape_rec_black=0x7f020006;
+        public static final int spinner_0=0x7f020007;
+        public static final int spinner_1=0x7f020008;
+        public static final int spinner_10=0x7f020009;
+        public static final int spinner_11=0x7f02000a;
+        public static final int spinner_2=0x7f02000b;
+        public static final int spinner_3=0x7f02000c;
+        public static final int spinner_4=0x7f02000d;
+        public static final int spinner_5=0x7f02000e;
+        public static final int spinner_6=0x7f02000f;
+        public static final int spinner_7=0x7f020010;
+        public static final int spinner_8=0x7f020011;
+        public static final int spinner_9=0x7f020012;
+        public static final int title_background=0x7f020013;
     }
     public static final class id {
-        public static final int action_settings=0x7f070047;
+        public static final int action_settings=0x7f070053;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f070000;
@@ -110,36 +111,41 @@ public final class R {
         public static final int encode_failed=0x7f070004;
         public static final int encode_succeeded=0x7f070005;
         public static final int horizontalScrollView1=0x7f070028;
-        public static final int imageView1=0x7f07001e;
+        public static final int imageView1=0x7f070018;
         public static final int inquery_fragment_kucun=0x7f070016;
         public static final int inquery_fragment_order=0x7f070015;
-        public static final int item_layout_orderquery_1=0x7f070033;
-        public static final int item_layout_orderquery_2=0x7f070034;
-        public static final int item_layout_orderquery_3=0x7f070035;
-        public static final int item_layout_orderquery_4=0x7f070036;
-        public static final int item_layout_orderquery_top=0x7f070032;
-        public static final int item_layout_tihuo_detail_1=0x7f070038;
-        public static final int item_layout_tihuo_detail_2=0x7f070039;
-        public static final int item_layout_tihuo_detail_3=0x7f07003a;
-        public static final int item_layout_tihuo_detail_4=0x7f07003b;
-        public static final int item_layout_tihuo_detail_5=0x7f07003c;
-        public static final int item_layout_tihuo_detail_6=0x7f07003d;
-        public static final int item_layout_tihuo_detail_7=0x7f07003e;
-        public static final int item_layout_tihuo_detail_top=0x7f070037;
+        public static final int item_layout_orderquery_1=0x7f07003a;
+        public static final int item_layout_orderquery_2=0x7f07003b;
+        public static final int item_layout_orderquery_3=0x7f07003c;
+        public static final int item_layout_orderquery_4=0x7f07003d;
+        public static final int item_layout_orderquery_top=0x7f070039;
+        public static final int item_layout_tihuo_detail_1=0x7f07003f;
+        public static final int item_layout_tihuo_detail_2=0x7f070040;
+        public static final int item_layout_tihuo_detail_3=0x7f070041;
+        public static final int item_layout_tihuo_detail_4=0x7f070042;
+        public static final int item_layout_tihuo_detail_5=0x7f070043;
+        public static final int item_layout_tihuo_detail_6=0x7f070044;
+        public static final int item_layout_tihuo_detail_7=0x7f070045;
+        public static final int item_layout_tihuo_detail_scan_1=0x7f070047;
+        public static final int item_layout_tihuo_detail_scan_2=0x7f070048;
+        public static final int item_layout_tihuo_detail_scan_3=0x7f070049;
+        public static final int item_layout_tihuo_detail_scan_4=0x7f07004a;
+        public static final int item_layout_tihuo_detail_scan_top=0x7f070046;
+        public static final int item_layout_tihuo_detail_top=0x7f07003e;
         public static final int launch_product_query=0x7f070006;
-        public static final int layout_dialog_single_item=0x7f070042;
-        public static final int layout_order_menu_bottom_line=0x7f07001b;
+        public static final int layout_dialog_single_item=0x7f07004e;
+        public static final int layout_order_menu_bottom_line=0x7f07001c;
         public static final int layout_order_top=0x7f070024;
-        public static final int layout_ordermenu_pager_1=0x7f07001d;
+        public static final int layout_ordermenu_pager_1=0x7f07001e;
         public static final int layout_ordermenu_pager_2=0x7f070020;
         public static final int layout_ordermenu_pager_3=0x7f070022;
-        public static final int listView_dialog=0x7f070031;
-        public static final int ll_order_menu=0x7f07001c;
+        public static final int listView_dialog=0x7f070038;
+        public static final int ll_order_menu=0x7f07001d;
         public static final int login_btn_name=0x7f070017;
-        public static final int login_id=0x7f070018;
-        public static final int login_psd=0x7f070019;
-        public static final int lv_public=0x7f070044;
-        public static final int message=0x7f070046;
+        public static final int login_id=0x7f070019;
+        public static final int login_psd=0x7f07001a;
+        public static final int lv_public=0x7f070050;
+        public static final int message=0x7f070052;
         public static final int order_inquery_billcode=0x7f070025;
         public static final int order_inquery_count=0x7f070027;
         public static final int order_inquery_time=0x7f070026;
@@ -155,19 +161,26 @@ public final class R {
         public static final int search_book_contents_failed=0x7f07000a;
         public static final int search_book_contents_succeeded=0x7f07000b;
         public static final int selected_view=0x7f070012;
-        public static final int spinnerImageView=0x7f070045;
+        public static final int spinnerImageView=0x7f070051;
         public static final int tag_image_keep_ratio=0x7f07000c;
         public static final int tag_imageview_url=0x7f07000d;
         public static final int tihuo_detail_orderid=0x7f07002f;
-        public static final int tv_dialog_item=0x7f070030;
-        public static final int tv_dialog_single_item=0x7f070043;
-        public static final int tv_item_center=0x7f070040;
-        public static final int tv_item_left=0x7f07003f;
-        public static final int tv_item_right=0x7f070041;
+        public static final int tihuo_detail_scan_cargoid=0x7f070031;
+        public static final int tihuo_detail_scan_count=0x7f070032;
+        public static final int tihuo_detail_scan_orderid=0x7f070030;
+        public static final int tihuo_detail_scan_remerk=0x7f070034;
+        public static final int tihuo_detail_scan_totalcount=0x7f070035;
+        public static final int tihuo_detail_scan_totalnum=0x7f070036;
+        public static final int tihuo_detail_scan_weight=0x7f070033;
+        public static final int tv_dialog_item=0x7f070037;
+        public static final int tv_dialog_single_item=0x7f07004f;
+        public static final int tv_item_center=0x7f07004c;
+        public static final int tv_item_left=0x7f07004b;
+        public static final int tv_item_right=0x7f07004d;
         public static final int tv_order_pager_sending=0x7f070021;
         public static final int tv_order_pager_signed=0x7f070023;
         public static final int tv_order_pager_wait=0x7f07001f;
-        public static final int vPager=0x7f07001a;
+        public static final int vPager=0x7f07001b;
     }
     public static final class layout {
         public static final int activity_base=0x7f030000;
@@ -178,13 +191,15 @@ public final class R {
         public static final int activity_scan_fragment=0x7f030005;
         public static final int activity_setting_fragment=0x7f030006;
         public static final int activity_ti_huo_detail=0x7f030007;
-        public static final int dialog_item=0x7f030008;
-        public static final int item_layout_inquery_order=0x7f030009;
-        public static final int item_layout_tihuo_detail=0x7f03000a;
-        public static final int item_top_title=0x7f03000b;
-        public static final int layout_single_item=0x7f03000c;
-        public static final int listview_public=0x7f03000d;
-        public static final int progress_custom=0x7f03000e;
+        public static final int activity_ti_huo_detail_scan=0x7f030008;
+        public static final int dialog_item=0x7f030009;
+        public static final int item_layout_inquery_order=0x7f03000a;
+        public static final int item_layout_tihuo_detail=0x7f03000b;
+        public static final int item_layout_tihuo_detail_scan=0x7f03000c;
+        public static final int item_top_title=0x7f03000d;
+        public static final int layout_single_item=0x7f03000e;
+        public static final int listview_public=0x7f03000f;
+        public static final int progress_custom=0x7f030010;
     }
     public static final class menu {
         public static final int login=0x7f0a0000;
@@ -192,6 +207,7 @@ public final class R {
         public static final int order_inquery=0x7f0a0002;
         public static final int scan=0x7f0a0003;
         public static final int ti_huo_detail=0x7f0a0004;
+        public static final int ti_huo_detail_scan=0x7f0a0005;
     }
     public static final class string {
         public static final int action_settings=0x7f080001;
@@ -201,6 +217,7 @@ public final class R {
         public static final int title_activity_order_inquery=0x7f080005;
         public static final int title_activity_scan_fragment=0x7f080004;
         public static final int title_activity_ti_huo_detail=0x7f080006;
+        public static final int title_activity_ti_huo_detail_scan=0x7f080007;
     }
     public static final class style {
         /** 

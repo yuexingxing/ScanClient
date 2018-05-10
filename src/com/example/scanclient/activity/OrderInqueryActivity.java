@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
-import com.example.scanclient.TiHuoDetailActivity;
 import com.example.scanclient.adapter.CommonAdapter;
 import com.example.scanclient.adapter.ViewHolder;
 import com.example.scanclient.db.dao.PupDetailDao;

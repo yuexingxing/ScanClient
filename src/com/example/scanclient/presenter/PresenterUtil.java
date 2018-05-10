@@ -215,4 +215,33 @@ public class PresenterUtil {
 			}
 		});
 	}
+	
+	/**
+	 * 提货扫描上传
+	 * @param context
+	 * @param callback
+	 */
+	public static void PupUpload(Context context, List<OrderInfo> list, String DvcID, final ObjectCallback callback){
+
+		SoapUtil.post(API.PupUpload, XmlUtil.PupUpload(list, DvcID), new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+
+				JSONObject jsonObject;
+				try {
+
+					jsonObject = new JSONObject(data.toString());
+//					jsonObject = new JSONObject(jsonObject.optJSONObject("PupUploadResponse").toString());
+//					jsonObject = new JSONObject(jsonObject.optJSONObject("PupUploadResult").toString());
+//					jsonObject = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+//					
+//					String msg = jsonObject.optString("Msg");
+					callback.callback(success, message, jsonObject.toString());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

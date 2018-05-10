@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.scanclient.db.DBHelper;
+import com.example.scanclient.info.OrderInfo;
 import com.example.scanclient.info.PupScan;
 import com.example.scanclient.info.SysUser;
 
@@ -25,7 +26,7 @@ public class PupScanDao {
 	 * @param info
 	 * @return
 	 */
-	public boolean addData(PupScan info) {
+	public boolean addData(OrderInfo info) {
 
 		boolean flag = false;
 		try {
@@ -41,7 +42,6 @@ public class PupScanDao {
 			cv.put(DBHelper.Count, info.getCount());
 			cv.put(DBHelper.Weight, info.getWeight());
 			cv.put(DBHelper.Remark, info.getRemark());
-			cv.put(DBHelper.Weight, info.getWeight());
 			cv.put(DBHelper.ScanTime, info.getScanTime());
 			cv.put(DBHelper.ScanUserID, info.getScanUserID());
 			cv.put(DBHelper.CrtBillNo, info.getCrtBillNo());
@@ -80,9 +80,9 @@ public class PupScanDao {
 	 * @param id
 	 * @return
 	 */
-	public List<PupScan> selectAllData() {
+	public List<OrderInfo> selectAllData() {
 
-		List<PupScan> list = new ArrayList<PupScan>();
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
 
 		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
 		String sql = "select * from " + DBHelper.TABLE_PupScan;
@@ -91,7 +91,7 @@ public class PupScanDao {
 
 		while(cursor.moveToNext()) {
 
-			PupScan info = new PupScan();
+			OrderInfo info = new OrderInfo();
 			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
 			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
 			info.setBatchNo(cursor.getString(cursor.getColumnIndex(DBHelper.BatchNo)));
@@ -113,6 +113,48 @@ public class PupScanDao {
 
 		return list;
 	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public List<OrderInfo> selectDataById(String orderId) {
+
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
+
+		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+		String sql = "select * from " + DBHelper.TABLE_PupScan
+				+ " where " 
+				+ DBHelper.OrderID + " = '" + orderId + "'"
+				+ " order by " + DBHelper.ScanTime + " desc";
+
+		Cursor cursor = db.rawQuery(sql, null);
+
+		while(cursor.moveToNext()) {
+
+			OrderInfo info = new OrderInfo();
+			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
+			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
+			info.setBatchNo(cursor.getString(cursor.getColumnIndex(DBHelper.BatchNo)));
+			info.setCargoID(cursor.getString(cursor.getColumnIndex(DBHelper.CargoID)));
+			info.setCount(cursor.getString(cursor.getColumnIndex(DBHelper.Count)));
+			info.setWeight(cursor.getString(cursor.getColumnIndex(DBHelper.Weight)));
+			info.setRemark(cursor.getString(cursor.getColumnIndex(DBHelper.Remark)));
+			info.setScanTime(cursor.getString(cursor.getColumnIndex(DBHelper.ScanTime)));
+			info.setScanUserID(cursor.getString(cursor.getColumnIndex(DBHelper.ScanUserID)));
+			info.setCrtBillNo(cursor.getString(cursor.getColumnIndex(DBHelper.CrtBillNo)));
+			info.setFlag(cursor.getString(cursor.getColumnIndex(DBHelper.Flag)));
+
+			list.add(info);
+		}
+
+		if(cursor != null){
+			cursor.close();
+		}
+
+		return list;
+	}
+
 
 
 	/**
