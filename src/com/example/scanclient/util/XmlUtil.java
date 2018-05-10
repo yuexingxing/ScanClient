@@ -95,8 +95,8 @@ public class XmlUtil {
 			.append("<CargoID>").append(info.getCargoID()).append("</CargoID>")
 			.append("<Count>").append(info.getCount()).append("</Count>")
 			.append("<Rmk>").append(info.getRemark()).append("</Rmk>")
-			.append("<UserID>").append(info.getRemark()).append("</UserID>")
-			.append("<ScanTime>").append(info.getScanTime().replace(" ", "")).append("</ScanTime>")
+			.append("<UserID>").append(info.getUserID()).append("</UserID>")
+			.append("<ScanTime>").append(info.getScanTime()).append("</ScanTime>")
 			.append("</PodScanMsgEty>");
 		}
 
@@ -105,12 +105,12 @@ public class XmlUtil {
 				+"<soap:Body>"  
 				+"<PodUpload xmlns=\"http://tempuri.org/\">"  
 				+"<para>"
-				+"<Consignee>"+DvcID+"</Consignee>"  
-				+"<SignOrg>"+DvcID+"</SignOrg>" 
-				+"<Telephone>"+DvcID+"</Telephone>" 
-				+"<Cellphone>"+DvcID+"</Cellphone>" 
-				+"<DeliverStatus>"+DvcID+"</DeliverStatus>" 
-				+"<CrtBillNo>"+DvcID+"</CrtBillNo>" 
+				+"<Consignee>"+12+"</Consignee>"  
+				+"<SignOrg>"+123+"</SignOrg>" 
+				+"<Telephone>"+"15555555555"+"</Telephone>" 
+				+"<Cellphone>"+"15555555555"+"</Cellphone>" 
+				+"<DeliverStatus>"+1+"</DeliverStatus>" 
+				+"<CrtBillNo>"+11203630+"</CrtBillNo>" 
 				+"<DvcID>"+DvcID+"</DvcID>" 
 
 				+"<MsgList>"  

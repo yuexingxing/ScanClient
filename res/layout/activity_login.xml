@@ -115,7 +115,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="维护(S1)" />
+            android:text="维护" />
 
         <Button
             android:layout_width="0dp"
@@ -124,7 +124,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:onClick="login"
-            android:text="登录(S2)" />
+            android:text="登录" />
     </LinearLayout>
 
 </LinearLayout>

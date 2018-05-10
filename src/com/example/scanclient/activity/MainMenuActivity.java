@@ -241,16 +241,16 @@ public class MainMenuActivity extends FragmentActivity {
 	 */
 	private void setMenuColor(int pos){
 
-		tvWait.setTextColor(Res.getColor(R.color.black));
-		tvDis.setTextColor(Res.getColor(R.color.black));
-		tvSigned.setTextColor(Res.getColor(R.color.black));
+		tvWait.setTextColor(Res.getColor(R.color.gray));
+		tvDis.setTextColor(Res.getColor(R.color.gray));
+		tvSigned.setTextColor(Res.getColor(R.color.gray));
 
 		if(pos == 0){
-			tvWait.setTextColor(Res.getColor(R.color.main_color));
+			tvWait.setTextColor(Res.getColor(R.color.black));
 		}else if(pos == 1){
-			tvDis.setTextColor(Res.getColor(R.color.main_color));
+			tvDis.setTextColor(Res.getColor(R.color.black));
 		}else if(pos == 2){
-			tvSigned.setTextColor(Res.getColor(R.color.main_color));
+			tvSigned.setTextColor(Res.getColor(R.color.black));
 		}
 	}
 

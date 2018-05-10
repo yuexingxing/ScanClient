@@ -1,4 +1,4 @@
-package com.example.scanclient.activity;
+package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import com.example.scanclient.R;
 import com.example.scanclient.R.color;
 import com.example.scanclient.R.id;
 import com.example.scanclient.R.layout;
+import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
 import com.example.scanclient.adapter.ViewHolder;
 import com.example.scanclient.db.dao.PupDetailDao;

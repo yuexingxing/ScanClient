@@ -1,8 +1,11 @@
-package com.example.scanclient.activity;
+package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
+import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
 import com.example.scanclient.adapter.ViewHolder;
 import com.example.scanclient.db.dao.PupDetailDao;
@@ -206,8 +209,9 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		}
 		
 		OrderInfo info = new OrderInfo();
+		info.setUserID(MyApplication.mUserInfo.getName());
 		info.setOrderID(orderId);
-		info.setCargoID(cargoId);
+		info.setCargoID("052358DN3004347298");
 		info.setCount(count);
 		info.setWeight(weight);
 		info.setRemark(edtRemark.getText().toString());

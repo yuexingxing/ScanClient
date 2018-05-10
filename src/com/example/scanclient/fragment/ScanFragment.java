@@ -1,9 +1,18 @@
 package com.example.scanclient.fragment;
 
 import com.example.scanclient.R;
+import com.example.scanclient.activity.scan.GetOffActivity;
+import com.example.scanclient.activity.scan.GetOnActivity;
+import com.example.scanclient.activity.scan.OutStorageActivity;
+import com.example.scanclient.activity.scan.ReStrokeActivity;
+import com.example.scanclient.activity.scan.SignActivity;
+import com.example.scanclient.activity.scan.TiHuoDetailActivity;
+import com.example.scanclient.activity.scan.TiHuoDetailScanActivity;
 import com.example.scanclient.util.CommandTools;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -57,17 +66,29 @@ public class ScanFragment extends Fragment implements OnClickListener {
 	public void onClick(View arg0) {
 
 		if(arg0.getId() == btnTiHuo.getId()){
-			CommandTools.showToast("btnTiHuo");
+			
+			Intent intent = new Intent(getActivity(), TiHuoDetailActivity.class);
+			startActivity(intent);
 		}else if(arg0.getId() == btnShangChe.getId()){
 
+			Intent intent = new Intent(getActivity(), GetOnActivity.class);
+			startActivity(intent);
 		}else if(arg0.getId() == btnXiaChe.getId()){
 
+			Intent intent = new Intent(getActivity(), GetOffActivity.class);
+			startActivity(intent);
 		}else if(arg0.getId() == btnSign.getId()){
 
+			Intent intent = new Intent(getActivity(), SignActivity.class);
+			startActivity(intent);
 		}else if(arg0.getId() == btnChuKu.getId()){
 
+			Intent intent = new Intent(getActivity(), OutStorageActivity.class);
+			startActivity(intent);
 		}else if(arg0.getId() == btnChongDa.getId()){
 
+			Intent intent = new Intent(getActivity(), ReStrokeActivity.class);
+			startActivity(intent);
 		}
 	}
 }

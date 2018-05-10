@@ -31,13 +31,14 @@
             android:id="@+id/layout_order_menu_bottom_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:gravity="bottom" >
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_order_menu"
             android:layout_width="fill_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -58,7 +59,7 @@
                         android:id="@+id/imageView1"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/scan" />
 
                     <TextView
                         android:id="@+id/tv_order_pager_wait"
@@ -68,7 +69,7 @@
                         android:gravity="center"
                         android:text="扫描"
                         android:textColor="@color/main_color"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,7 +84,7 @@
                         android:id="@+id/imageView1"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/inquery" />
 
                     <TextView
                         android:id="@+id/tv_order_pager_sending"
@@ -93,7 +94,7 @@
                         android:gravity="center"
                         android:text="查询"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -108,7 +109,7 @@
                         android:id="@+id/imageView1"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/setting" />
 
                     <TextView
                         android:id="@+id/tv_order_pager_signed"
@@ -118,7 +119,7 @@
                         android:gravity="center"
                         android:text="设置"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 

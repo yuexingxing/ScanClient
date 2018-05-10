@@ -59,19 +59,47 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.OrderInqueryActivity"
+            android:name="com.example.scanclient.activity.inquery.OrderInqueryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.TiHuoDetailActivity"
+            android:name="com.example.scanclient.activity.scan.TiHuoDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.TiHuoDetailScanActivity"
+            android:name="com.example.scanclient.activity.scan.TiHuoDetailScanActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOnActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOffActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.SignActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.OutStorageActivitytorageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.ReStrokeActivity"
+            android:label="@string/title_activity_re_stroke" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.inquery.StockInqueryActivity"
+            android:label="@string/title_activity_stock_inquery" >
         </activity>
     </application>
 
