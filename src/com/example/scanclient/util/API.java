@@ -3,6 +3,8 @@ package com.example.scanclient.util;
 public class API {
 
 	public static String URL = "http://47.97.207.208/apiService/RFService.asmx?";
+	
+	public static String URL_APP_UPDATE = "http://47.97.207.208:8080/appUpdate/checkNew?os=android&type=kkwl&ver=1.0&tag=normal";
 
 	public static String HelloWorld = "HelloWorld";//²âÊÔ½Ó¿Ú
 	public static String RFLogin = "RFLogin";//µÇÂ¼

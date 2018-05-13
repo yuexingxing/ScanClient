@@ -17,5 +17,6 @@
     <string name="title_activity_stock_inquery">StockInqueryActivity</string>
     <string name="title_activity_get_on_info">GetOnInfoActivity</string>
     <string name="title_activity_get_on_scan">GetOnScanActivity</string>
+    <string name="title_activity_bt_config">BtConfigActivity</string>
 
 </resources>

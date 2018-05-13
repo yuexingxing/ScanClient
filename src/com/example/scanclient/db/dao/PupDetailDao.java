@@ -36,7 +36,6 @@ public class PupDetailDao {
 
 			ContentValues cv = new ContentValues();
 
-			cv.put(DBHelper.ID, info.getID());
 			cv.put(DBHelper.OrderID, info.getOrderID());
 			cv.put(DBHelper.CargoID, info.getCargoID());
 			cv.put(DBHelper.CargoName, info.getCargoName());

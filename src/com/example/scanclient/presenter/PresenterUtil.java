@@ -185,7 +185,6 @@ public class PresenterUtil {
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResponse").toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResult").toString());
-					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
 
 					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
 					String flag = jsonObjectRst.optString("Flag");
@@ -194,6 +193,7 @@ public class PresenterUtil {
 						return;
 					}
 
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
 					List<OrderInfo> dataList = new ArrayList<OrderInfo>();
 					//接口不改，只能前端判断是否是数组和对象
 					if(jsonObject.toString().contains("[") && jsonObject.toString().contains("]")){

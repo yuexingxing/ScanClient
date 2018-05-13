@@ -12,6 +12,7 @@ import com.example.scanclient.db.dao.PupHeaderDao;
 import com.example.scanclient.db.dao.PupScanDao;
 import com.example.scanclient.info.OrderInfo;
 import com.example.scanclient.presenter.PresenterUtil;
+import com.example.scanclient.printer.util.PrinterUtil;
 import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.OkHttpUtil.ObjectCallback;
 import com.example.scanclient.util.Res;
@@ -192,7 +193,15 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 	}
 
 	public void toPrint(View v){
+		
+		if(dataList.size() == 0){
+			CommandTools.showToast("当前没有数据");
+			return;
+		}
 
+		OrderInfo info = new OrderInfo();
+		info.setOrderID("1234567890");
+		PrinterUtil.printLabel(this, info, dataList);
 	}
 
 	public void toComplete(View v){
@@ -239,7 +248,7 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		OrderInfo info = new OrderInfo();
 		info.setUserID("admin");
 		info.setOrderID(orderId);
-		info.setCargoID("052358DN3004347298");
+		info.setCargoID(cargoId);
 		info.setCount(count);
 		info.setWeight(weight);
 		info.setRemark(edtRemark.getText().toString());

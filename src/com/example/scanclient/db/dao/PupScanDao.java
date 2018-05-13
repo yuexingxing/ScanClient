@@ -35,7 +35,6 @@ public class PupScanDao {
 
 			ContentValues cv = new ContentValues();
 
-			cv.put(DBHelper.ID, info.getID());
 			cv.put(DBHelper.OrderID, info.getOrderID());
 			cv.put(DBHelper.BatchNo, info.getBatchNo());
 			cv.put(DBHelper.CargoID, info.getCargoID());

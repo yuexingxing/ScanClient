@@ -1,7 +1,6 @@
 package com.example.scanclient.activity;
 
 import java.util.ArrayList;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.adapter.MFragmentPagerAdapter;
@@ -58,7 +56,7 @@ public class MainMenuActivity extends FragmentActivity {
 	@ViewInject(R.id.tv_order_pager_wait) TextView tvWait;
 	@ViewInject(R.id.tv_order_pager_sending) TextView tvDis;
 	@ViewInject(R.id.tv_order_pager_signed) TextView tvSigned;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

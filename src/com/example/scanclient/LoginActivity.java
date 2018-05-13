@@ -2,19 +2,28 @@ package com.example.scanclient;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONObject;
 import com.example.scanclient.activity.MainMenuActivity;
 import com.example.scanclient.db.dao.SysCodeDao;
 import com.example.scanclient.info.SysCode;
 import com.example.scanclient.presenter.PresenterUtil;
+import com.example.scanclient.util.API;
 import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.Constant;
+import com.example.scanclient.util.HttpUtils;
+import com.example.scanclient.util.OkHttpUtil;
 import com.example.scanclient.util.OkHttpUtil.ObjectCallback;
 import com.example.scanclient.util.SharedPreferencesUtils;
+import com.example.scanclient.view.CustomProgress;
 import com.example.scanclient.view.SingleItemDialog;
 import com.example.scanclient.view.SingleItemDialog.SingleItemCallBack;
+import com.example.scanclient.view.UpdateAppDialog;
+import com.example.scanclient.view.UpdateAppDialog.ResultCallBack;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -49,6 +58,7 @@ public class LoginActivity extends Activity {
 		ViewUtils.inject(this);
 
 		initData();
+		checkAppUpdate();
 	}
 
 	private void initData(){
@@ -143,4 +153,69 @@ public class LoginActivity extends Activity {
 			}
 		}).setNegativeButton("取消", null).show();
 	}
+	
+	public void checkAppUpdate(){
+
+		final int mClientVersion = CommandTools.getVersionCode();
+
+		OkHttpUtil.checkUpdate(this, API.URL_APP_UPDATE, new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+				// TODO Auto-generated method stub
+				JSONObject jsonObject = (JSONObject) data;
+				if(jsonObject.isNull("url")){
+					return;
+				}
+
+				String beforce = jsonObject.optString("beforce");
+				String vercode = jsonObject.optString("vercode");
+				if (TextUtils.isEmpty(vercode)) {
+					vercode = "0";
+				}
+
+				int mServerVersion = Integer.parseInt(vercode);//服务器上版本号
+				String strName = jsonObject.optString("vername");//服务器上版本名称
+				String remark = jsonObject.optString("remark");
+				final String downloadUrl = jsonObject.optString("url");
+
+				if(mServerVersion > mClientVersion){
+
+					UpdateAppDialog.showDialog(LoginActivity.this, beforce, "更新检测", "发现新版本号 " + strName + "，确定更新吗?", remark, new ResultCallBack() {
+					
+						@Override
+						public void callback(boolean flag) {
+							if (flag == true) {
+								HttpUtils.download(LoginActivity.this, downloadUrl, mHandler);
+							} else {
+
+							}
+						}
+					});
+				}
+			}
+		});
+	}
+
+	public Handler mHandler = new Handler() {
+
+		public void handleMessage(Message msg) {
+
+			if (msg.what == 0x0001) {
+				UpdateAppDialog.showDialog(LoginActivity.this, "1", "正在更新程序", "正在更新程序", "", null);
+			} else if (msg.what == 0x0002) {
+				CustomProgress.dissDialog();
+			} else if (msg.what == 0x11) {
+				Bundle bundle = msg.getData();
+				int totalSize = bundle.getInt("totalSize");
+				int curSize = bundle.getInt("curSize");
+				if (curSize >= totalSize) {
+					UpdateAppDialog.dissDialog();
+					MyApplication.finishAllActivities();
+					return;
+				}
+				UpdateAppDialog.updateProgress(totalSize, curSize);
+			}
+		}
+	};
 }
