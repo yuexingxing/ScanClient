@@ -82,7 +82,7 @@ public class SettingFragment extends Fragment implements OnClickListener{
 		}
 		else
 		{
-			Toast.makeText(getActivity(), "本地蓝牙已打开", Toast.LENGTH_SHORT).show(); 
+//			Toast.makeText(getActivity(), "本地蓝牙已打开", Toast.LENGTH_SHORT).show(); 
 		} 
 	}
 
@@ -146,6 +146,7 @@ public class SettingFragment extends Fragment implements OnClickListener{
 					if (!printer.wakeUp())
 						return;
 
+					Toast.makeText(getActivity(), "打印机连接成功", Toast.LENGTH_SHORT).show(); 
 					Log.e("JQ", "printer open ok");
 
 					//	Toast.makeText(this, " 找到外部蓝牙设备", Toast.LENGTH_LONG).show();		

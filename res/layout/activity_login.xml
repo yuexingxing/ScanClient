@@ -7,7 +7,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp" >
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp" >
 
         <TextView
             android:layout_width="match_parent"
@@ -20,13 +21,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        android:layout_height="30dp"
+        android:gravity="center" >
+        
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="版本V"
+            android:textSize="15sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/login_version"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="版本V1.0"
+            android:text="1.0"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -49,8 +57,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="selMan"
             android:hint="请选择账号"
+            android:onClick="selMan"
+            android:clickable="true"
             android:text="" />
 
         <ImageView
@@ -60,7 +69,6 @@
             android:layout_marginRight="20dp"
             android:onClick="selMan"
             android:src="@drawable/icon_conner_down" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -102,8 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="123"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,6 +134,13 @@
             android:layout_weight="1"
             android:onClick="login"
             android:text="登录" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom|right" >
     </LinearLayout>
 
 </LinearLayout>

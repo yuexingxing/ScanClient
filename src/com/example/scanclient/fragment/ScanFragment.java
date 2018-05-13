@@ -1,6 +1,7 @@
 package com.example.scanclient.fragment;
 
 import com.example.scanclient.R;
+import com.example.scanclient.activity.inquery.OrderInqueryActivity;
 import com.example.scanclient.activity.scan.GetOffActivity;
 import com.example.scanclient.activity.scan.GetOnActivity;
 import com.example.scanclient.activity.scan.OutStorageActivity;
@@ -68,7 +69,7 @@ public class ScanFragment extends Fragment implements OnClickListener {
 
 		if(arg0.getId() == btnTiHuo.getId()){
 			
-			Intent intent = new Intent(getActivity(), TiHuoDetailActivity.class);
+			Intent intent = new Intent(getActivity(), OrderInqueryActivity.class);
 			startActivity(intent);
 		}else if(arg0.getId() == btnShangChe.getId()){
 
@@ -82,16 +83,19 @@ public class ScanFragment extends Fragment implements OnClickListener {
 			startActivity(intent);
 		}else if(arg0.getId() == btnSign.getId()){
 
-			Intent intent = new Intent(getActivity(), SignActivity.class);
-			startActivity(intent);
+			CommandTools.showToast("开发中");
+//			Intent intent = new Intent(getActivity(), SignActivity.class);
+//			startActivity(intent);
 		}else if(arg0.getId() == btnChuKu.getId()){
 
-			Intent intent = new Intent(getActivity(), OutStorageActivity.class);
-			startActivity(intent);
+			CommandTools.showToast("开发中");
+//			Intent intent = new Intent(getActivity(), OutStorageActivity.class);
+//			startActivity(intent);
 		}else if(arg0.getId() == btnChongDa.getId()){
 
-			Intent intent = new Intent(getActivity(), ReStrokeActivity.class);
-			startActivity(intent);
+			CommandTools.showToast("开发中");
+//			Intent intent = new Intent(getActivity(), ReStrokeActivity.class);
+//			startActivity(intent);
 		}
 	}
 }

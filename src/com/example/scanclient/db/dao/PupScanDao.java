@@ -61,11 +61,11 @@ public class PupScanDao {
 	 * É¾³ýÊý¾Ý
 	 * @param info
 	 */
-	public void deleteById(String id){
+	public void deleteById(OrderInfo info){
 
 		String sql = " delete from " + DBHelper.TABLE_PupScan
-				+ " where " 
-				+ DBHelper.OrderID + " = '" + id + "'";
+				+ " where " + DBHelper.OrderID + " = '" + info.getOrderID() + "'"
+				+ " and " + DBHelper.CargoID + " = '"+info.getCargoID()+"'";
 
 		try{
 			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
@@ -112,7 +112,7 @@ public class PupScanDao {
 
 		return list;
 	}
-	
+
 	/**
 	 * @param id
 	 * @return

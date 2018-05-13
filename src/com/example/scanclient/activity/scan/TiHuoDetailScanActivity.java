@@ -136,7 +136,7 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		edtCargoId.setText("");
 		tvTotalCount.setText(dataList.size() + "");
 	}
-
+	
 	public void toBack(View v){
 
 		dataList.clear();
@@ -150,9 +150,9 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 			return;
 		}
 
-		final String orderId = dataList.get(currPos).getOrderID();
-
+		final OrderInfo orderInfo = dataList.get(currPos);
 		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
+		
 		if(pupHeaderDao.checkData(orderId) < 1){
 			CommandTools.showToast("本地表中没有数据");
 		}else{
@@ -162,12 +162,12 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 				public void callback(int position) {
 					// TODO Auto-generated method stub
 					if(position == 0){
-						
+
 						pupHeaderDao.deleteById(orderId);
 						new PupDetailDao().deleteById(orderId);
-						new PupScanDao().deleteById(orderId);
+						new PupScanDao().deleteById(orderInfo);
 						CommandTools.showToast("删除成功");
-						
+
 						initDBData();
 					}
 				}
@@ -193,14 +193,14 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 	}
 
 	public void toPrint(View v){
-		
+
 		if(dataList.size() == 0){
 			CommandTools.showToast("当前没有数据");
 			return;
 		}
 
 		OrderInfo info = new OrderInfo();
-		info.setOrderID("1234567890");
+		info.setOrderID(orderId);
 		PrinterUtil.printLabel(this, info, dataList);
 	}
 
@@ -218,7 +218,13 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 
 				new PupHeaderDao().deleteById(orderId);
 				new PupDetailDao().deleteById(orderId);
-				new PupScanDao().deleteById(orderId);
+
+				int len = dataList.size();
+				for(int i=0; i<len; i++){
+
+					OrderInfo info = dataList.get(i);
+					new PupScanDao().deleteById(info);
+				}
 
 				initDBData();
 			}
@@ -254,6 +260,7 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		info.setRemark(edtRemark.getText().toString());
 		info.setScanTime(CommandTools.getTime());
 
+		pupScanDao.deleteById(info);
 		pupScanDao.addData(info);
 
 		initDBData();

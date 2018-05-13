@@ -56,21 +56,23 @@ public class PrinterUtil {
 		int startY = 10;
 		int lineH = 30;//每行高度
 		
-		printer.jpl.text.drawOut(14, startY+=lineH, "订单号: " + info.getOrderID());
+		printer.jpl.text.drawOut(14, startY, "订单号: " + info.getOrderID());
 		printer.jpl.text.drawOut(14, startY+=lineH, CommandTools.getTime());
 		printer.jpl.text.drawOut(14, startY+=lineH, "");
 
 		int len = dataList.size();
 		for(int i=0; i<len; i++){
 			
-			printer.jpl.text.drawOut(14, startY, info.getCargoID());
-			printer.jpl.text.drawOut(100, startY, "1");
+			OrderInfo orderInfo = dataList.get(i);
+			
 			startY = startY + 30;
+			printer.jpl.text.drawOut(14, startY, orderInfo.getCargoID());
+			printer.jpl.text.drawOut(300, startY, "1");
 		}
 		
 		printer.jpl.text.drawOut(14, startY+=lineH, "");
 		printer.jpl.text.drawOut(14, startY+=lineH, "合计: ");
-		printer.jpl.text.drawOut(100, startY, len + "");
+		printer.jpl.text.drawOut(300, startY, len + "");
 
 		printer.jpl.page.end();
 		printer.jpl.page.print();

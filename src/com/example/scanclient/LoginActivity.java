@@ -43,6 +43,7 @@ import android.widget.TextView;
  */
 public class LoginActivity extends Activity {
 
+	@ViewInject(R.id.login_version) TextView tvVersion;
 	@ViewInject(R.id.login_btn_name) TextView tvName;
 	@ViewInject(R.id.login_id) EditText edtId;
 	@ViewInject(R.id.login_psd) EditText edtPsd;
@@ -63,6 +64,7 @@ public class LoginActivity extends Activity {
 
 	private void initData(){
 
+		tvVersion.setText(CommandTools.getVersionName());
 		String loginId = SharedPreferencesUtils.getParam(this, Constant.SP_LOGIN_ID, "").toString();
 		String loginPsd = SharedPreferencesUtils.getParam(this, Constant.SP_LOGIN_PSD, "").toString();
 

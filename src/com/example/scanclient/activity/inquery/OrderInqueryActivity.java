@@ -49,7 +49,7 @@ public class OrderInqueryActivity extends BaseActivity {
 	List<OrderInfo> dataList = new ArrayList<OrderInfo>();
 	CommonAdapter<OrderInfo> commonAdapter;
 
-	@ViewInject(R.id.order_inquery_billcode) EditText edtBillcode;
+	@ViewInject(R.id.order_inquery_billcode) EditText edtOrderId;
 	@ViewInject(R.id.order_inquery_time) TextView tvTime;
 	@ViewInject(R.id.order_inquery_count) TextView tvCount;
 	private int mYear, mMonth, mDay;
@@ -138,14 +138,14 @@ public class OrderInqueryActivity extends BaseActivity {
 
 	public void inquery(View v){
 
-		String billcode = edtBillcode.getText().toString();
-		if(TextUtils.isEmpty(billcode)){
+		String orderId = edtOrderId.getText().toString();
+		if(TextUtils.isEmpty(orderId)){
 			CommandTools.showToast("请输入订单号");
 			return;
 		}
 
 		String strTime = mYear + "-" + mMonth + "-" + mDay;
-		PresenterUtil.PupQueryOrderHeader(this, billcode, strTime, MyApplication.mUserInfo.getName(), CommandTools.getMIME(this),  new ObjectCallback() {
+		PresenterUtil.PupQueryOrderHeader(this, orderId, strTime, MyApplication.mUserInfo.getName(), CommandTools.getMIME(this),  new ObjectCallback() {
 
 			@Override
 			public void callback(boolean success, String message, Object data) {
@@ -154,6 +154,8 @@ public class OrderInqueryActivity extends BaseActivity {
 				dataList.clear();
 				dataList.addAll((Collection<? extends OrderInfo>) data);
 				commonAdapter.notifyDataSetChanged();
+				
+				tvCount.setText(dataList.size() + "");
 			}
 		});
 	}
@@ -165,10 +167,10 @@ public class OrderInqueryActivity extends BaseActivity {
 			return;
 		}
 
-		final String billcode = dataList.get(currPos).getOrderID();
+		final OrderInfo orderInfo = dataList.get(currPos);
 
 		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
-		if(pupHeaderDao.checkData(billcode) < 1){
+		if(pupHeaderDao.checkData(orderInfo.getOrderID()) < 1){
 			CommandTools.showToast("本地表中没有数据");
 		}else{
 			CommandTools.showChooseDialog(this, "是否删除本地表中数据", new CommandToolsCallback() {
@@ -177,10 +179,10 @@ public class OrderInqueryActivity extends BaseActivity {
 				public void callback(int position) {
 					// TODO Auto-generated method stub
 					if(position == 0){
-						pupHeaderDao.deleteById(billcode);
+						pupHeaderDao.deleteById(orderInfo.getOrderID());
 
-						new PupDetailDao().deleteById(billcode);
-						new PupScanDao().deleteById(billcode);
+						new PupDetailDao().deleteById(orderInfo.getOrderID());
+						new PupScanDao().deleteById(orderInfo);
 						
 						dataList.clear();
 						commonAdapter.notifyDataSetChanged();
@@ -189,6 +191,8 @@ public class OrderInqueryActivity extends BaseActivity {
 				}
 			});
 		}
+		
+		tvCount.setText(dataList.size() + "");
 	}
 
 	public void toBack(View v){

@@ -146,7 +146,7 @@ public class PresenterUtil {
 									pupHeaderDao.deleteById(info.getOrderID());
 
 									new PupDetailDao().deleteById(info.getOrderID());
-									new PupScanDao().deleteById(info.getOrderID());
+									new PupScanDao().deleteById(info);
 									CommandTools.showToast("É¾³ý³É¹¦");
 
 									pupHeaderDao.addData(info);
