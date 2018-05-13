@@ -25,7 +25,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="上车" />
+            android:text="装车" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="下车" />
+            android:text="卸车" />
 
         <Button
             android:id="@+id/scan_fragment_sign"

@@ -2,21 +2,15 @@ package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.scanclient.R;
-import com.example.scanclient.R.color;
-import com.example.scanclient.R.id;
-import com.example.scanclient.R.layout;
 import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
 import com.example.scanclient.adapter.ViewHolder;
 import com.example.scanclient.db.dao.PupDetailDao;
 import com.example.scanclient.info.OrderInfo;
-import com.example.scanclient.util.CommandTools;
 import com.example.scanclient.util.Res;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +23,6 @@ import android.widget.TextView;
  *
  */
 public class TiHuoDetailActivity extends BaseActivity {
-	
 	
 	@ViewInject(R.id.tihuo_detail_orderid) TextView tvOrderId;
 

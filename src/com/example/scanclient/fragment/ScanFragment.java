@@ -9,6 +9,7 @@ import com.example.scanclient.activity.scan.SignActivity;
 import com.example.scanclient.activity.scan.TiHuoDetailActivity;
 import com.example.scanclient.activity.scan.TiHuoDetailScanActivity;
 import com.example.scanclient.util.CommandTools;
+import com.example.scanclient.util.Constant;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -72,10 +73,12 @@ public class ScanFragment extends Fragment implements OnClickListener {
 		}else if(arg0.getId() == btnShangChe.getId()){
 
 			Intent intent = new Intent(getActivity(), GetOnActivity.class);
+			intent.putExtra("scan_type", Constant.SCANTYPE_GETON);
 			startActivity(intent);
 		}else if(arg0.getId() == btnXiaChe.getId()){
 
-			Intent intent = new Intent(getActivity(), GetOffActivity.class);
+			Intent intent = new Intent(getActivity(), GetOnActivity.class);
+			intent.putExtra("scan_type", Constant.SCANTYPE_GETOFF);
 			startActivity(intent);
 		}else if(arg0.getId() == btnSign.getId()){
 

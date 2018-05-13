@@ -65,7 +65,7 @@ public class SoapUtil {
 				//1：创建服务地址  
 				URL url;
 				try {
-					url = new URL("http://47.97.207.208/apiService/RFService.asmx?");
+					url = new URL(API.URL);
 
 					//2：打开到服务地址的一个连接  
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();  

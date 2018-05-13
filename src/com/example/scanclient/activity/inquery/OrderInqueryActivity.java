@@ -181,6 +181,9 @@ public class OrderInqueryActivity extends BaseActivity {
 
 						new PupDetailDao().deleteById(billcode);
 						new PupScanDao().deleteById(billcode);
+						
+						dataList.clear();
+						commonAdapter.notifyDataSetChanged();
 						CommandTools.showToast("É¾³ý³É¹¦");
 					}
 				}

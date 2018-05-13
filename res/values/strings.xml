@@ -15,5 +15,7 @@
     <string name="title_activity_out_storage">OutStorageActivity</string>
     <string name="title_activity_re_stroke">ReStrokeActivity</string>
     <string name="title_activity_stock_inquery">StockInqueryActivity</string>
+    <string name="title_activity_get_on_info">GetOnInfoActivity</string>
+    <string name="title_activity_get_on_scan">GetOnScanActivity</string>
 
 </resources>

@@ -29,8 +29,8 @@ public final class DBHelper {
 	public static final String TABLE_PupScan = "PupScan";
 	public static final String TABLE_LoadingCarInfo = "LoadingCarInfo";
 	public static final String TABLE_LoadingHeader = "LoadingHeader";
-	public static final String TABLE_LoadingDetail = "LoadingDetail";
 	public static final String TABLE_LoadingScan = "LoadingScan";
+	public static final String TABLE_LoadingDetail = "LoadingDetail";
 	public static final String TABLE_UnloadingCarInfo = "UnloadingCarInfo";
 	public static final String TABLE_UnloadingHeader = "UnloadingHeader";
 	public static final String TABLE_UnloadingDetail = "UnloadingDetail";
@@ -91,7 +91,7 @@ public final class DBHelper {
 	public static final String Flag = "Flag";
 	public static final String CREATE_PupHeader = "create table "
 			+ TABLE_PupHeader + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ OrderDate + "  nvarchar(50) null default(''), "
 			+ Status + "  nvarchar(50) null default(''), "
@@ -108,7 +108,7 @@ public final class DBHelper {
 	public static final String Remark = "Remark";
 	public static final String CREATE_PupDetail = "create table "
 			+ TABLE_PupDetail + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
 			+ CargoName + "  nvarchar(50) null default(''), "
@@ -122,7 +122,7 @@ public final class DBHelper {
 	public static final String ScanUserID = "ScanUserID";
 	public static final String CREATE_PupScan = "create table "
 			+ TABLE_PupScan + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ BatchNo + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -142,10 +142,11 @@ public final class DBHelper {
 	public static final String GpsCode = "GpsCode";
 	public static final String StationName = "StationName";
 	public static final String TransferPhone = "TransferPhone";
+	public static final String ScanType = "ScanType";//扫描类型，装车，卸车
 	public static final String CREATE_LoadingCarInfo = "create table "
 			+ TABLE_LoadingCarInfo + " (" 
-			+ ScanID + "  nvarchar(50) null default(''), "
-			+ Cph + "  nvarchar(50) null default(''), "
+			+ ScanID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ Cph + "  nvarchar(50) null default(''), " 
 			+ Driver + "  nvarchar(50) null default(''), "
 			+ Telephone + "  nvarchar(50) null default(''), "
 			+ Cellphone + "  nvarchar(50) null default(''), "
@@ -154,20 +155,22 @@ public final class DBHelper {
 			+ TransferPhone + "  nvarchar(50) null default(''), "
 			+ ScanTime + "  nvarchar(50) null default(''), "
 			+ CrtBillNo + "  nvarchar(50) null default(''), "
+			+ ScanType + "  nvarchar(50) null default(''), "
 			+ Flag + " nvarchar(50) null default(''));";
 
 
 	public static final String CREATE_LoadingHeader = "create table "
 			+ TABLE_LoadingHeader + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ OrderDate + "  nvarchar(50) null default(''), "
+			+ ScanType + "  nvarchar(50) null default(''), "
 			+ Status + " nvarchar(50) null default(''));";
 
 	public static final String CREATE_LoadingDetail = "create table "
 			+ TABLE_LoadingDetail + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -176,11 +179,12 @@ public final class DBHelper {
 			+ BatchNo + "  nvarchar(50) null default(''), "
 			+ Count + "  nvarchar(50) null default(''), "
 			+ Weight + "  nvarchar(50) null default(''), "
+			+ ScanType + "  nvarchar(50) null default(''), "
 			+ Remark + " nvarchar(50) null default(''));";
 
 	public static final String CREATE_LoadingScan = "create table "
 			+ TABLE_LoadingScan + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -188,12 +192,13 @@ public final class DBHelper {
 			+ Remark + "  nvarchar(50) null default(''), "
 			+ ScanTime + "  nvarchar(50) null default(''), "
 			+ ScanUserID + "  nvarchar(50) null default(''), "
+			+ ScanType + "  nvarchar(50) null default(''), "
 			+ Flag + " nvarchar(50) null default(''));";//0:not saved; 1:not uploaded; 2:uploaded
 
 	public static final String IsSorting = "IsSorting";
 	public static final String CREATE_UnloadingCarInfo = "create table "
 			+ TABLE_UnloadingCarInfo + " (" 
-			+ ScanID + "  nvarchar(50) null default(''), "
+			+ ScanID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ Cph + "  nvarchar(50) null default(''), "
 			+ Driver + "  nvarchar(50) null default(''), "
 			+ IsSorting + "  nvarchar(50) null default(''), "
@@ -207,7 +212,7 @@ public final class DBHelper {
 
 	public static final String CREATE_UnloadingHeader = "create table "
 			+ TABLE_UnloadingHeader + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ OrderDate + "  nvarchar(50) null default(''), "
@@ -215,7 +220,7 @@ public final class DBHelper {
 
 	public static final String CREATE_UnloadingDetail = "create table "
 			+ TABLE_UnloadingDetail + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -228,7 +233,7 @@ public final class DBHelper {
 
 	public static final String CREATE_UnloadingScan = "create table "
 			+ TABLE_UnloadingScan + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -243,7 +248,7 @@ public final class DBHelper {
 	public static final String DeliverStatus = "DeliverStatus";
 	public static final String CREATE_PodConsignee = "create table "
 			+ TABLE_PodConsignee + " (" 
-			+ ScanID + "  nvarchar(50) null default(''), "
+			+ ScanID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ Consignee + "  nvarchar(50) null default(''), "
 			+ SignOrg + "  nvarchar(50) null default(''), "
 			+ Telephone + "  nvarchar(50) null default(''), "
@@ -255,7 +260,7 @@ public final class DBHelper {
 
 	public static final String CREATE_PodHeader = "create table "
 			+ TABLE_PodHeader + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ OrderDate + "  nvarchar(50) null default(''), "
@@ -263,7 +268,7 @@ public final class DBHelper {
 
 	public static final String CREATE_PodDetail = "create table "
 			+ TABLE_PodDetail + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -276,7 +281,7 @@ public final class DBHelper {
 
 	public static final String CREATE_PodScan = "create table "
 			+ TABLE_PodScan + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ScanID + "  nvarchar(50) null default(''), "
 			+ OrderID + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
@@ -289,7 +294,7 @@ public final class DBHelper {
 	public static final String Photo = "Photo";
 	public static final String CREATE_ExPhoto = "create table "
 			+ TABLE_ExPhoto + " (" 
-			+ ID + "  nvarchar(50) null default(''), "
+			+ ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ CrtBillNo + "  nvarchar(50) null default(''), "
 			+ CargoID + "  nvarchar(50) null default(''), "
 			+ Photo + "  nvarchar(50) null default(''), "
@@ -315,15 +320,16 @@ public final class DBHelper {
 
 			db.execSQL(CREATE_ExPhoto);
 			db.execSQL(CREATE_LoadingCarInfo);
-			db.execSQL(CREATE_LoadingDetail);
+			db.execSQL(CREATE_LoadingHeader);
 			db.execSQL(CREATE_LoadingScan);
+			db.execSQL(CREATE_LoadingDetail);
 			db.execSQL(CREATE_PodConsignee);
-			db.execSQL(CREATE_PodDetail);
 			db.execSQL(CREATE_PodHeader);
 			db.execSQL(CREATE_PodScan);
-			db.execSQL(CREATE_PupDetail);
+			db.execSQL(CREATE_PodDetail);
 			db.execSQL(CREATE_PupHeader);
 			db.execSQL(CREATE_PupScan);
+			db.execSQL(CREATE_PupDetail);
 			db.execSQL(CREATE_SysUserRights);
 			db.execSQL(CREATE_TABLE_SysCode);
 			db.execSQL(CREATE_TABLE_SysUser);

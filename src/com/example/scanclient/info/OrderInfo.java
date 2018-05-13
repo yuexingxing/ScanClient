@@ -1,7 +1,13 @@
 package com.example.scanclient.info;
 
-public class OrderInfo {
+import java.io.Serializable;
 
+public class OrderInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String ID = "";
 	private String Name = "";
 	private String Type = "";
@@ -18,7 +24,7 @@ public class OrderInfo {
 	private String Status = "";
 	private String CrtBillNo = "";
 	private String IsPrinted = "";
-	private String Flag = "";
+	private String Flag = "0";
 	private String CargoID = "";
 	private String CargoName = "";
 	private String Model = "";
@@ -41,6 +47,8 @@ public class OrderInfo {
 	private String SignOrg = "";
 	private String DeliverStatus = "";
 	private String Photo = "";
+	
+	private String ScanType = "";//扫描类型，装车，卸车
 	
 	private boolean selected = false;
 	
@@ -283,6 +291,12 @@ public class OrderInfo {
 	}
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+	public String getScanType() {
+		return ScanType;
+	}
+	public void setScanType(String scanType) {
+		ScanType = scanType;
 	}
 
 

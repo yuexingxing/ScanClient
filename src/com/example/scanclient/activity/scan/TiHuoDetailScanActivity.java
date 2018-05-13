@@ -2,7 +2,6 @@ package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.activity.BaseActivity;
@@ -19,7 +18,13 @@ import com.example.scanclient.util.Res;
 import com.example.scanclient.util.CommandTools.CommandToolsCallback;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,24 +39,26 @@ import android.widget.AdapterView.OnItemClickListener;
  *
  */
 public class TiHuoDetailScanActivity extends BaseActivity {
-	
+
 	@ViewInject(R.id.tihuo_detail_scan_orderid) TextView tvOrderId;
 	@ViewInject(R.id.tihuo_detail_scan_cargoid) EditText edtCargoId;
 	@ViewInject(R.id.tihuo_detail_scan_count) EditText edtCount;
 	@ViewInject(R.id.tihuo_detail_scan_weight) EditText edtWeight;
 	@ViewInject(R.id.tihuo_detail_scan_remerk) EditText edtRemark;
-	
+
 	@ViewInject(R.id.tihuo_detail_scan_totalcount) TextView tvTotalCount;
 	@ViewInject(R.id.tihuo_detail_scan_totalnum) TextView tvTotalNum;
 
 	@ViewInject(R.id.lv_public) ListView listView;
 	List<OrderInfo> dataList = new ArrayList<OrderInfo>();
 	CommonAdapter<OrderInfo> commonAdapter;
-	
+
 	private String orderId;
 	private PupScanDao pupScanDao;
 
 	private int currPos = -1;
+	private static final int TAKE_PICTURE = 0x000001;
+	private Bitmap mBitmap;
 
 	@Override
 	protected void onBaseCreate(Bundle savedInstanceState) {
@@ -106,27 +113,29 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 	public void initData() {
 		// TODO Auto-generated method stub
 		setTitle("提货扫描");
-		
+
 		orderId = getIntent().getStringExtra("order_id");
 		tvOrderId.setText(orderId);
-		
+
 		pupScanDao = new PupScanDao();
 		initDBData();
 	}
-	
+
 	/**
 	 * 从表中取数据
 	 */
 	public void initDBData(){
-		
+
+		currPos = -1;
+
 		dataList.clear();
 		dataList.addAll(pupScanDao.selectDataById(orderId));
 		commonAdapter.notifyDataSetChanged();
-		
+
 		edtCargoId.setText("");
 		tvTotalCount.setText(dataList.size() + "");
 	}
-	
+
 	public void toBack(View v){
 
 		dataList.clear();
@@ -140,10 +149,10 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 			return;
 		}
 
-		final String billcode = dataList.get(currPos).getOrderID();
+		final String orderId = dataList.get(currPos).getOrderID();
 
 		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
-		if(pupHeaderDao.checkData(billcode) < 1){
+		if(pupHeaderDao.checkData(orderId) < 1){
 			CommandTools.showToast("本地表中没有数据");
 		}else{
 			CommandTools.showChooseDialog(this, "是否删除本地表中数据", new CommandToolsCallback() {
@@ -152,73 +161,92 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 				public void callback(int position) {
 					// TODO Auto-generated method stub
 					if(position == 0){
-						pupHeaderDao.deleteById(billcode);
-
-						new PupDetailDao().deleteById(billcode);
-						new PupScanDao().deleteById(billcode);
+						
+						pupHeaderDao.deleteById(orderId);
+						new PupDetailDao().deleteById(orderId);
+						new PupScanDao().deleteById(orderId);
 						CommandTools.showToast("删除成功");
+						
+						initDBData();
 					}
 				}
 			});
 		}
 	}
-	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == TAKE_PICTURE && resultCode == RESULT_OK) {
+
+			mBitmap = (Bitmap) data.getExtras().get("data");
+			mBitmap = CommandTools.resetBitmap(mBitmap);
+		}
+	}
+
 	public void toTakePhoto(View v){
 
+		Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(openCameraIntent, TAKE_PICTURE);
 	}
 
 	public void toPrint(View v){
 
 	}
-	
+
 	public void toComplete(View v){
 
 		if(dataList.size() == 0){
 			CommandTools.showToast("当前没有数据");
 			return;
 		}
-		
+
 		PresenterUtil.PupUpload(this, dataList, CommandTools.getMIME(this), new ObjectCallback() {
-			
+
 			@Override
 			public void callback(boolean success, String message, Object data) {
-				// TODO Auto-generated method stub
-				CommandTools.showToast(data.toString());
+
+				new PupHeaderDao().deleteById(orderId);
+				new PupDetailDao().deleteById(orderId);
+				new PupScanDao().deleteById(orderId);
+
+				initDBData();
 			}
 		});
 	}
-	
+
 	public void save(View v){
-		
+
 		String cargoId = edtCargoId.getText().toString();
 		if(TextUtils.isEmpty(cargoId)){
 			CommandTools.showToast("物料编码不能为空");
 			return;
 		}
-		
+
 		String count = edtCount.getText().toString();
 		if(TextUtils.isEmpty(count)){
 			CommandTools.showToast("数量不能为空");
 			return;
 		}
-		
+
 		String weight = edtWeight.getText().toString();
 		if(TextUtils.isEmpty(weight)){
 			CommandTools.showToast("重量不能为空");
 			return;
 		}
-		
+
 		OrderInfo info = new OrderInfo();
-		info.setUserID(MyApplication.mUserInfo.getName());
+		info.setUserID("admin");
 		info.setOrderID(orderId);
 		info.setCargoID("052358DN3004347298");
 		info.setCount(count);
 		info.setWeight(weight);
 		info.setRemark(edtRemark.getText().toString());
 		info.setScanTime(CommandTools.getTime());
-		
+
 		pupScanDao.addData(info);
-		
+
 		initDBData();
 	}
 }
