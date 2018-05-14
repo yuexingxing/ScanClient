@@ -154,6 +154,33 @@ public class PupScanDao {
 		return list;
 	}
 
+	/**
+	 * @param
+	 * @param n
+	 */
+	public boolean updateData(OrderInfo info){
+
+		boolean flag = false;
+		String sql = "update " + DBHelper.TABLE_PupScan 
+				+ " set " 
+				+ DBHelper.Flag + " = '" + info.getFlag() + "'"
+				+ " where " + DBHelper.CargoID + " = '" + info.getCargoID() + "'"
+				+ " and " + DBHelper.OrderID + " = '" + info.getOrderID() + "'";
+		try{
+			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+			db.beginTransaction();
+			db.execSQL(sql);
+			db.setTransactionSuccessful();
+			flag = true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			db.endTransaction();
+		}
+
+		return flag;
+	}
+
 
 
 	/**

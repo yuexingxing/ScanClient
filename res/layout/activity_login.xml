@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="textPassword"
-            android:text="123" />
+            android:text="0098" />
     </LinearLayout>
 
     <LinearLayout

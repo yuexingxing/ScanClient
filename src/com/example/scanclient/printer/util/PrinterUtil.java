@@ -27,7 +27,7 @@ public class PrinterUtil {
 			return false;
 		}
 
-		printer.jpl.page.start(0, 0, 576, 424, PAGE_ROTATE.x0);
+		printer.jpl.page.start(0, 0, 576, 340, PAGE_ROTATE.x0);
 		//		printer.jpl.barcode.code128(ALIGN.CENTER, 0, 64, BAR_UNIT.x2, BAR_ROTATE.ANGLE_0, bar_str);//printer.jpl.barcode.code128(16, 0, 64, BAR_UNIT.x3, BAR_ROTATE.ANGLE_0, bar_str);
 		//	printer.jpl.barcode.PDF417(16, 68, 5, 3, 4, BAR_UNIT.x2, ROTATE.ROTATE_0, bar_str);
 		//		printer.jpl.text.drawOut(ALIGN.CENTER, 66, bar_str, 16, false, false, false, false, TEXT_ENLARGE.x2, TEXT_ENLARGE.x1, ROTATE.ROTATE_0);//printer.jpl.text.drawOut(96, 64, bar_str);
@@ -76,7 +76,9 @@ public class PrinterUtil {
 
 		printer.jpl.page.end();
 		printer.jpl.page.print();
-		printer.jpl.feedMarkOrGap(0);//printer.jpl.feedNextLabelEnd(48);//printer.jpl.feedNextLabelBegin();
+//		printer.jpl.feedMarkOrGap(5);
+//		printer.jpl.feedNextLabelBegin();
+//		printer.jpl.feedMarkOrGap(0);//printer.jpl.feedNextLabelEnd(48);//printer.jpl.feedNextLabelBegin();
 		int i = 0;
 		for(i=0;i<10;i++)
 		{

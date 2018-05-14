@@ -2,7 +2,6 @@ package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
@@ -20,10 +19,7 @@ import com.example.scanclient.util.CommandTools.CommandToolsCallback;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -154,7 +150,12 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
 		
 		if(pupHeaderDao.checkData(orderId) < 1){
-			CommandTools.showToast("本地表中没有数据");
+//			CommandTools.showToast("本地表中没有数据");
+			
+			dataList.remove(currPos);
+			commonAdapter.notifyDataSetChanged();
+			tvTotalCount.setText(dataList.size() + "");
+			return;
 		}else{
 			CommandTools.showChooseDialog(this, "是否删除本地表中数据", new CommandToolsCallback() {
 
@@ -215,18 +216,19 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 
 			@Override
 			public void callback(boolean success, String message, Object data) {
-
-				new PupHeaderDao().deleteById(orderId);
-				new PupDetailDao().deleteById(orderId);
-
+				
+//				new PupHeaderDao().deleteById(orderId);
+//				new PupDetailDao().deleteById(orderId);
+//
 				int len = dataList.size();
 				for(int i=0; i<len; i++){
 
 					OrderInfo info = dataList.get(i);
-					new PupScanDao().deleteById(info);
+					info.setFlag("1");//已上传
+					pupScanDao.updateData(info);
 				}
-
-				initDBData();
+//
+//				initDBData();
 			}
 		});
 	}

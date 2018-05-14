@@ -260,7 +260,6 @@ public class PresenterUtil {
 					// flag 1 是成功，-1 失败，失败的时候才有 MSG 
 					CommandTools.showToast("提交成功");
 					callback.callback(true, message, jsonObject.toString());
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
