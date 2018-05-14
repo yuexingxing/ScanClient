@@ -18,6 +18,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="连接打印机" />
     </LinearLayout>
 
@@ -34,6 +35,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="注销" />
     </LinearLayout>
 

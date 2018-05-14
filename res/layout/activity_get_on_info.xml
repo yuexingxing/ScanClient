@@ -48,6 +48,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_button"
             android:onClick="save"
             android:text="添加" />
     </LinearLayout>
@@ -76,6 +80,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_button"
             android:onClick="del"
             android:text="删除" />
     </LinearLayout>
@@ -115,6 +123,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:onClick="toBack"
             android:text="返回"
             android:textSize="12sp" />
@@ -125,6 +134,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:onClick="toNext"
             android:text="完成"
             android:textSize="12sp" />

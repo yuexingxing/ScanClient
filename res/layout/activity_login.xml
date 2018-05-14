@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center" >
-        
-         <TextView
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="版本V"
@@ -57,9 +57,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
             android:hint="请选择账号"
             android:onClick="selMan"
-            android:clickable="true"
             android:text="" />
 
         <ImageView
@@ -124,6 +124,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="维护" />
 
         <Button
@@ -132,6 +133,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:onClick="login"
             android:text="登录" />
     </LinearLayout>

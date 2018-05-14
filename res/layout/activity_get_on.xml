@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
-      <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -24,8 +24,8 @@
             android:layout_weight="1"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -39,14 +39,14 @@
             android:textSize="15sp" />
 
         <EditText
-           android:id="@+id/geton_driver"
+            android:id="@+id/geton_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -67,8 +67,8 @@
             android:inputType="number"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -89,8 +89,8 @@
             android:inputType="number"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -110,8 +110,8 @@
             android:layout_weight="1"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -131,8 +131,8 @@
             android:layout_weight="1"
             android:text="" />
     </LinearLayout>
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal" >
@@ -154,30 +154,32 @@
             android:text="" />
     </LinearLayout>
 
-       <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:gravity="bottom"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal" >
 
         <Button
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:onClick="toBack"
             android:text="返回" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:onClick="toNext"
             android:text="继续" />
     </LinearLayout>
-      
+
 </LinearLayout>

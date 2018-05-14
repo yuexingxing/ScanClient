@@ -2,7 +2,7 @@
 
     <color name="transparent">#00000000</color>
     <!-- APP主色字体 -->
-    <color name="main_color">#666666</color>
+    <color name="main_color">#1296db</color>
     <color name="main_color_down">#346480</color>
     <color name="text_gray">#999999</color>
     <!-- 黑色字体 -->
