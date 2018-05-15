@@ -35,7 +35,6 @@ public class PupScanDao {
 
 			ContentValues cv = new ContentValues();
 
-			cv.put(DBHelper.ID, info.getID());
 			cv.put(DBHelper.OrderID, info.getOrderID());
 			cv.put(DBHelper.BatchNo, info.getBatchNo());
 			cv.put(DBHelper.CargoID, info.getCargoID());
@@ -62,11 +61,11 @@ public class PupScanDao {
 	 * É¾³ýÊý¾Ý
 	 * @param info
 	 */
-	public void deleteById(String id){
+	public void deleteById(OrderInfo info){
 
 		String sql = " delete from " + DBHelper.TABLE_PupScan
-				+ " where " 
-				+ DBHelper.OrderID + " = '" + id + "'";
+				+ " where " + DBHelper.OrderID + " = '" + info.getOrderID() + "'"
+				+ " and " + DBHelper.CargoID + " = '"+info.getCargoID()+"'";
 
 		try{
 			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
@@ -113,7 +112,7 @@ public class PupScanDao {
 
 		return list;
 	}
-	
+
 	/**
 	 * @param id
 	 * @return
@@ -153,6 +152,33 @@ public class PupScanDao {
 		}
 
 		return list;
+	}
+
+	/**
+	 * @param
+	 * @param n
+	 */
+	public boolean updateData(OrderInfo info){
+
+		boolean flag = false;
+		String sql = "update " + DBHelper.TABLE_PupScan 
+				+ " set " 
+				+ DBHelper.Flag + " = '" + info.getFlag() + "'"
+				+ " where " + DBHelper.CargoID + " = '" + info.getCargoID() + "'"
+				+ " and " + DBHelper.OrderID + " = '" + info.getOrderID() + "'";
+		try{
+			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+			db.beginTransaction();
+			db.execSQL(sql);
+			db.setTransactionSuccessful();
+			flag = true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			db.endTransaction();
+		}
+
+		return flag;
 	}
 
 

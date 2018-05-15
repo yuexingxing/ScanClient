@@ -20,9 +20,10 @@
 
         <TextView
             android:id="@+id/tihuo_detail_orderid"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text=""
             android:textSize="15sp" />
@@ -64,7 +65,8 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:onClick="toBack"
-            android:text="返回(S1)" />
+            android:background="@drawable/shape_button"
+            android:text="返回" />
 
         <Button
             android:layout_width="0dp"
@@ -73,7 +75,8 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:onClick="tiHuo"
-            android:text="提货(S2)" />
+            android:background="@drawable/shape_button"
+            android:text="提货" />
     </LinearLayout>
 
 </LinearLayout>

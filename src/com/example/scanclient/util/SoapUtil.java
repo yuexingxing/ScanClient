@@ -21,7 +21,7 @@ import android.os.Message;
 import android.util.Log;
 
 public class SoapUtil {
-	
+
 	static class CallBackData{
 
 		private boolean success;
@@ -65,7 +65,7 @@ public class SoapUtil {
 				//1：创建服务地址  
 				URL url;
 				try {
-					url = new URL("http://47.97.207.208/apiService/RFService.asmx?op=" + actionName);
+					url = new URL(API.URL);
 
 					//2：打开到服务地址的一个连接  
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();  
@@ -94,9 +94,7 @@ public class SoapUtil {
 
 						while(null != (temp = br.readLine())){  
 							sb.append(temp);  
-						}  
-
-						System.out.println(sb.toString());  
+						}   
 
 						is.close();  
 						isr.close();  
@@ -105,6 +103,7 @@ public class SoapUtil {
 
 					os.close();  
 
+					Log.v("zd", "服务器返回: " + sb.toString());
 					XmlToJson xmlToJson = new XmlToJson.Builder(sb.toString()).build();
 					String jsonStr = xmlToJson.toJson().toString();
 
@@ -113,7 +112,7 @@ public class SoapUtil {
 					jsonObject = new JSONObject(jsonObject.optJSONObject("soap:Body").toString());
 
 					Log.i("zd", jsonObject.toString());
-					
+
 					CallBackData callBackData = new CallBackData();
 					callBackData.setData(jsonObject.toString());
 					callBackData.setCallback(callback);
@@ -129,13 +128,13 @@ public class SoapUtil {
 			}  
 		}).start();  
 	}
-	
+
 	public static Handler mHandler = new Handler(){
-		
+
 		public void handleMessage(Message msg){
-			
+
 			if(msg.what == 0x1001){
-				
+
 				CallBackData callBackData = (CallBackData) msg.obj;
 				if(callBackData.getCallback() != null){
 					callBackData.getCallback().callback(callBackData.isSuccess(), callBackData.getMessage(), callBackData.getData());

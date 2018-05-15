@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ScanClient</string>
+    <string name="app_name">奎克物流</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -9,5 +9,14 @@
     <string name="title_activity_order_inquery">OrderInqueryActivity</string>
     <string name="title_activity_ti_huo_detail">TiHuoDetailActivity</string>
     <string name="title_activity_ti_huo_detail_scan">TiHuoDetailScanActivity</string>
+    <string name="title_activity_get_on">GetOnActivity</string>
+    <string name="title_activity_get_off">GetOffActivity</string>
+    <string name="title_activity_sign">SignActivity</string>
+    <string name="title_activity_out_storage">OutStorageActivity</string>
+    <string name="title_activity_re_stroke">ReStrokeActivity</string>
+    <string name="title_activity_stock_inquery">StockInqueryActivity</string>
+    <string name="title_activity_get_on_info">GetOnInfoActivity</string>
+    <string name="title_activity_get_on_scan">GetOnScanActivity</string>
+    <string name="title_activity_bt_config">BtConfigActivity</string>
 
 </resources>

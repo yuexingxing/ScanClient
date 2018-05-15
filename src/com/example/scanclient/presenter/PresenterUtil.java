@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.content.Context;
 
+import com.example.scanclient.db.dao.LoadingDetailDao;
 import com.example.scanclient.db.dao.PupDetailDao;
 import com.example.scanclient.db.dao.PupHeaderDao;
 import com.example.scanclient.db.dao.PupScanDao;
@@ -70,17 +71,16 @@ public class PresenterUtil {
 
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("RFLoginResponse").toString());
-					JSONObject jsonObjectResult = new JSONObject(jsonObject.optJSONObject("RFLoginResult").toString());
-					jsonObject = new JSONObject(jsonObjectResult.optJSONObject("Rst").toString());
-					String flag = jsonObject.optString("flag");
-					//					if(!flag.equals("1")){
-					//						
-					//						String msg = jsonObject.optString("msg");
-					//						CommandTools.showToast(msg);
-					//						return;
-					//					}
+					jsonObject = new JSONObject(jsonObject.optJSONObject("RFLoginResult").toString());
 
-					jsonObject = new JSONObject(jsonObjectResult.optJSONObject("User").toString());
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
+					jsonObject = new JSONObject(jsonObject.optJSONObject("User").toString());
 
 					SysCode sysCode = new SysCode();
 					sysCode.setID(jsonObject.optString("UserID"));
@@ -118,6 +118,14 @@ public class PresenterUtil {
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PupQueryOrderHeaderResponse").toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PupQueryOrderHeaderResult").toString());
+
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
 					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderTitle").toString());
 
 					final List<OrderInfo> dataList = new ArrayList<OrderInfo>();
@@ -138,7 +146,7 @@ public class PresenterUtil {
 									pupHeaderDao.deleteById(info.getOrderID());
 
 									new PupDetailDao().deleteById(info.getOrderID());
-									new PupScanDao().deleteById(info.getOrderID());
+									new PupScanDao().deleteById(info);
 									CommandTools.showToast("删除成功");
 
 									pupHeaderDao.addData(info);
@@ -177,8 +185,15 @@ public class PresenterUtil {
 					jsonObject = new JSONObject(data.toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResponse").toString());
 					jsonObject = new JSONObject(jsonObject.optJSONObject("PodQueryOrderDetailResult").toString());
-					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
 
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
 					List<OrderInfo> dataList = new ArrayList<OrderInfo>();
 					//接口不改，只能前端判断是否是数组和对象
 					if(jsonObject.toString().contains("[") && jsonObject.toString().contains("]")){
@@ -215,7 +230,7 @@ public class PresenterUtil {
 			}
 		});
 	}
-	
+
 	/**
 	 * 提货扫描上传
 	 * @param context
@@ -223,7 +238,7 @@ public class PresenterUtil {
 	 */
 	public static void PupUpload(Context context, List<OrderInfo> list, String DvcID, final ObjectCallback callback){
 
-		SoapUtil.post(API.PupUpload, XmlUtil.PupUpload(list, DvcID), new ObjectCallback() {
+		SoapUtil.post(API.PodUpload , XmlUtil.PodUpload (list, DvcID), new ObjectCallback() {
 
 			@Override
 			public void callback(boolean success, String message, Object data) {
@@ -232,16 +247,156 @@ public class PresenterUtil {
 				try {
 
 					jsonObject = new JSONObject(data.toString());
-//					jsonObject = new JSONObject(jsonObject.optJSONObject("PupUploadResponse").toString());
-//					jsonObject = new JSONObject(jsonObject.optJSONObject("PupUploadResult").toString());
-//					jsonObject = new JSONObject(jsonObject.optJSONObject("Rst").toString());
-//					
-//					String msg = jsonObject.optString("Msg");
-					callback.callback(success, message, jsonObject.toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("PodUploadResponse").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject("PodUploadResult").toString());
+
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
+					// flag 1 是成功，-1 失败，失败的时候才有 MSG 
+					CommandTools.showToast("提交成功");
+					callback.callback(true, message, jsonObject.toString());
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+
+	/**
+	 * 订单详情查询
+	 * @param context
+	 * @param callback
+	 */
+	public static void LoadingQueryOrderHeader(Context context, final String actionName, final OrderInfo info, final ObjectCallback callback){
+
+		SoapUtil.post(actionName, XmlUtil.LoadingQueryOrderHeader(actionName, info), new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+
+				JSONObject jsonObject;
+				try {
+
+					jsonObject = new JSONObject(data.toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Response").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Result").toString());
+
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderTitle").toString());
+
+					OrderInfo orderInfo = new GsonBuilder().create().fromJson(jsonObject.toString(), new TypeToken<OrderInfo>(){}.getType());
+					orderInfo.setOrderID(info.getOrderID());
+
+					callback.callback(success, message, orderInfo);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public static void LoadingQueryOrderDetail(Context context, final String actionName, final OrderInfo mOrderInfo, final ObjectCallback callback){
+
+		SoapUtil.post(actionName, XmlUtil.LoadingQueryOrderDetail(actionName, mOrderInfo), new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+
+				JSONObject jsonObject;
+				try {
+
+					jsonObject = new JSONObject(data.toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Response").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Result").toString());
+
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}
+
+					jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetail").toString());
+
+
+					LoadingDetailDao loadingDetailDao = new LoadingDetailDao();
+					List<OrderInfo> dataList = new ArrayList<OrderInfo>();
+					//接口不改，只能前端判断是否是数组和对象
+					if(jsonObject.toString().contains("[") && jsonObject.toString().contains("]")){
+
+						JSONArray jsonArray = new JSONArray(jsonObject.optJSONArray("OrderDetailEty").toString());
+						int len = jsonArray.length();
+						for(int i=0; i<len; i++){
+
+							JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+							OrderInfo orderInfo = new GsonBuilder().create().fromJson(jsonObject1.toString(), new TypeToken<OrderInfo>(){}.getType());
+							orderInfo.setOrderID(mOrderInfo.getOrderID());
+							orderInfo.setScanTime(mOrderInfo.getScanTime());
+							orderInfo.setCph(mOrderInfo.getCph());
+							dataList.add(orderInfo);
+
+							loadingDetailDao.addData(orderInfo);//保存到本地表
+						}
+					}else{
+
+						jsonObject = new JSONObject(jsonObject.optJSONObject("OrderDetailEty").toString());
+						OrderInfo orderInfo = new GsonBuilder().create().fromJson(jsonObject.toString(), new TypeToken<OrderInfo>(){}.getType());
+						orderInfo.setOrderID(mOrderInfo.getOrderID());
+						orderInfo.setScanTime(mOrderInfo.getScanTime());
+						orderInfo.setCph(mOrderInfo.getCph());
+						dataList.add(orderInfo);
+
+						loadingDetailDao.addData(orderInfo);//保存到本地表
+					}
+
+					callback.callback(success, message, dataList);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public static void LoadingUpload(Context context, final String actionName, List<OrderInfo> list, OrderInfo mOrderInfo, final ObjectCallback callback){
+
+		SoapUtil.post(actionName, XmlUtil.LoadingUpload(actionName, list, mOrderInfo), new ObjectCallback() {
+
+			@Override
+			public void callback(boolean success, String message, Object data) {
+
+				JSONObject jsonObject;
+				try {
+
+					jsonObject = new JSONObject(data.toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Response").toString());
+					jsonObject = new JSONObject(jsonObject.optJSONObject(actionName + "Result").toString());
+
+					JSONObject jsonObjectRst = new JSONObject(jsonObject.optJSONObject("Rst").toString());
+					String flag = jsonObjectRst.optString("Flag");
+					if(!flag.equals("1")){
+						CommandTools.showToast(jsonObjectRst.optString("Msg"));
+						return;
+					}else{
+						CommandTools.showToast("提交成功");
+					}
+
+					callback.callback(success, message, null);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 }

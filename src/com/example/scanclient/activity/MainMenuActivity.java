@@ -1,7 +1,6 @@
 package com.example.scanclient.activity;
 
 import java.util.ArrayList;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.adapter.MFragmentPagerAdapter;
@@ -55,10 +53,14 @@ public class MainMenuActivity extends FragmentActivity {
 	@ViewInject(R.id.layout_ordermenu_pager_2) LinearLayout layoutInquery;
 	@ViewInject(R.id.layout_ordermenu_pager_3) LinearLayout layoutSetting;
 
-	@ViewInject(R.id.tv_order_pager_wait) TextView tvWait;
-	@ViewInject(R.id.tv_order_pager_sending) TextView tvDis;
-	@ViewInject(R.id.tv_order_pager_signed) TextView tvSigned;
-
+	@ViewInject(R.id.main_tv_scan) TextView tvScan;
+	@ViewInject(R.id.main_tv_query) TextView tvQuery;
+	@ViewInject(R.id.main_tv_setting) TextView tvSetting;
+	
+	@ViewInject(R.id.main_img_scan) ImageView imgScan;
+	@ViewInject(R.id.main_img_query) ImageView imgQuery;
+	@ViewInject(R.id.main_img_setting) ImageView imgSetting;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -241,16 +243,23 @@ public class MainMenuActivity extends FragmentActivity {
 	 */
 	private void setMenuColor(int pos){
 
-		tvWait.setTextColor(Res.getColor(R.color.black));
-		tvDis.setTextColor(Res.getColor(R.color.black));
-		tvSigned.setTextColor(Res.getColor(R.color.black));
+		tvScan.setTextColor(Res.getColor(R.color.gray));
+		tvQuery.setTextColor(Res.getColor(R.color.gray));
+		tvSetting.setTextColor(Res.getColor(R.color.gray));
+		
+		imgScan.setImageDrawable(Res.getDrawable(R.drawable.scan));
+		imgQuery.setImageDrawable(Res.getDrawable(R.drawable.query));
+		imgSetting.setImageDrawable(Res.getDrawable(R.drawable.setting));
 
 		if(pos == 0){
-			tvWait.setTextColor(Res.getColor(R.color.main_color));
+			tvScan.setTextColor(Res.getColor(R.color.main_color));
+			imgScan.setImageDrawable(Res.getDrawable(R.drawable.scan_down));
 		}else if(pos == 1){
-			tvDis.setTextColor(Res.getColor(R.color.main_color));
+			tvQuery.setTextColor(Res.getColor(R.color.main_color));
+			imgQuery.setImageDrawable(Res.getDrawable(R.drawable.query_down));
 		}else if(pos == 2){
-			tvSigned.setTextColor(Res.getColor(R.color.main_color));
+			tvSetting.setTextColor(Res.getColor(R.color.main_color));
+			imgSetting.setImageDrawable(Res.getDrawable(R.drawable.setting_dwon));
 		}
 	}
 

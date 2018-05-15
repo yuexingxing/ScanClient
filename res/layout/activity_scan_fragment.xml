@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_background"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="提货" />
 
         <Button
@@ -25,7 +27,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:text="上车" />
+            android:background="@drawable/shape_button"
+            android:text="装车" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="下车" />
+            android:background="@drawable/shape_button"
+            android:text="卸车" />
 
         <Button
             android:id="@+id/scan_fragment_sign"
@@ -49,6 +53,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="签收" />
     </LinearLayout>
 
@@ -64,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="出库" />
 
         <Button
@@ -73,6 +79,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:background="@drawable/shape_button"
             android:text="重打" />
     </LinearLayout>
 

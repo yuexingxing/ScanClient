@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.scanclient"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -31,7 +31,7 @@
     <application
         android:name="com.example.scanclient.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -59,19 +59,64 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.OrderInqueryActivity"
+            android:name="com.example.scanclient.activity.inquery.OrderInqueryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.TiHuoDetailActivity"
+            android:name="com.example.scanclient.activity.scan.TiHuoDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.example.scanclient.activity.TiHuoDetailScanActivity"
+            android:name="com.example.scanclient.activity.scan.TiHuoDetailScanActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOnActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOffActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.SignActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.OutStorageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.ReStrokeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.inquery.StockInqueryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOnInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.activity.scan.GetOnScanActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.scanclient.BtConfigActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
     </application>
 
