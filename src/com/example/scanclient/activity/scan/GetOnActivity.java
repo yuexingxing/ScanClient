@@ -1,5 +1,6 @@
 package com.example.scanclient.activity.scan;
 
+import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.R.layout;
 import com.example.scanclient.activity.BaseActivity;
@@ -18,6 +19,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * 上车、下车
@@ -59,6 +61,11 @@ public class GetOnActivity extends BaseActivity {
 			setTitle("下车");
 		}
 	}
+	
+	public void onEventMainThread(Object event) {  
+		  
+	    String msg = event.toString();  
+	}  
 
 	public void toBack(View v){
 
@@ -108,5 +115,11 @@ public class GetOnActivity extends BaseActivity {
 		Intent intent = new Intent(this, GetOnInfoActivity.class);
 		intent.putExtra("order_info", mOrderInfo);
 		startActivity(intent);
+	}
+	
+	public void onStop(){
+		super.onStop();
+
+		MyApplication.getEventBus().unregister(this);
 	}
 }

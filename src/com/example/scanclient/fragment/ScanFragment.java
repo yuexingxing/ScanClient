@@ -6,6 +6,7 @@ import com.example.scanclient.activity.scan.GetOffActivity;
 import com.example.scanclient.activity.scan.GetOnActivity;
 import com.example.scanclient.activity.scan.OutStorageActivity;
 import com.example.scanclient.activity.scan.ReStrokeActivity;
+import com.example.scanclient.activity.scan.ScanCompareActivity;
 import com.example.scanclient.activity.scan.SignActivity;
 import com.example.scanclient.activity.scan.TiHuoDetailActivity;
 import com.example.scanclient.activity.scan.TiHuoDetailScanActivity;
@@ -37,6 +38,7 @@ public class ScanFragment extends Fragment implements OnClickListener {
 	@ViewInject(R.id.scan_fragment_sign) Button btnSign;
 	@ViewInject(R.id.scan_fragment_chuku) Button btnChuKu;
 	@ViewInject(R.id.scan_fragment_chongda) Button btnChongDa;
+	@ViewInject(R.id.scan_fragment_check) Button btnCheck;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class ScanFragment extends Fragment implements OnClickListener {
 		btnSign.setOnClickListener(this);
 		btnChuKu.setOnClickListener(this);
 		btnChongDa.setOnClickListener(this);
+		btnCheck.setOnClickListener(this);
 	}
 
 	@Override
@@ -96,6 +99,10 @@ public class ScanFragment extends Fragment implements OnClickListener {
 			CommandTools.showToast("¿ª·¢ÖÐ");
 //			Intent intent = new Intent(getActivity(), ReStrokeActivity.class);
 //			startActivity(intent);
+		}else if(arg0.getId() == btnCheck.getId()){
+
+			Intent intent = new Intent(getActivity(), ScanCompareActivity.class);
+			startActivity(intent);
 		}
 	}
 }

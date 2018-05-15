@@ -3,6 +3,8 @@ package com.example.scanclient.activity.scan;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
@@ -59,6 +61,7 @@ public class GetOnScanActivity extends BaseActivity {
 	protected void onBaseCreate(Bundle savedInstanceState) {
 		setContentViewId(R.layout.activity_get_on_scan);
 		ViewUtils.inject(this);
+		MyApplication.getEventBus().register(this);
 	}
 
 	@Override
@@ -107,7 +110,7 @@ public class GetOnScanActivity extends BaseActivity {
 	@Override
 	public void initData() {
 		// TODO Auto-generated method stub
-		
+
 		mOrderInfo = (OrderInfo) getIntent().getSerializableExtra("order_info");
 		if(mOrderInfo.getScanType().equals(Constant.SCANTYPE_GETON)){
 			setTitle("装车扫描");
@@ -121,7 +124,7 @@ public class GetOnScanActivity extends BaseActivity {
 		dataList.addAll(loadingDetailDao.selectAllData(mOrderInfo));
 		int len = dataList.size();
 		if(dataList.size() == 0){
-			
+
 			String actionName = "";
 			if(mOrderInfo.getScanType().equals(Constant.SCANTYPE_GETON)){
 				actionName = API.LoadingQueryOrderDetail;
@@ -147,6 +150,13 @@ public class GetOnScanActivity extends BaseActivity {
 		commonAdapter.notifyDataSetChanged();
 		tvCount.setText(len + "");
 	}
+
+	public void onEventMainThread(Object event) {  
+
+		String billcode = event.toString();  
+		edtCargoId.setText(billcode);
+		save(null);
+	}  
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -206,7 +216,7 @@ public class GetOnScanActivity extends BaseActivity {
 			CommandTools.showToast("当前没有数据");
 			return;
 		}
-		
+
 		String actionName = "";
 		if(mOrderInfo.getScanType().equals(Constant.SCANTYPE_GETON)){
 			actionName = API.LoadingUpload;
@@ -232,7 +242,7 @@ public class GetOnScanActivity extends BaseActivity {
 				commonAdapter.notifyDataSetChanged();
 				edtCargoId.setText("");
 				tvCount.setText(dataList.size() + "");
-				
+
 				edtRemark.setText("");
 			}
 		});
@@ -251,16 +261,26 @@ public class GetOnScanActivity extends BaseActivity {
 			CommandTools.showToast("数量不能为空");
 			return;
 		}
+		
+		OrderInfo orderInfo = new OrderInfo();
+		orderInfo.setCph(mOrderInfo.getCph());
+		orderInfo.setOrderID(mOrderInfo.getOrderID());
+		orderInfo.setCargoID(cargoId);
+		orderInfo.setCount(count);
+		orderInfo.setRemark(edtRemark.getText().toString());
+		orderInfo.setScanTime(CommandTools.getTime());
 
-		mOrderInfo.setCargoID(cargoId);
-		mOrderInfo.setCount(count);
-		mOrderInfo.setRemark(edtRemark.getText().toString());
-		mOrderInfo.setScanTime(CommandTools.getTime());
-
-		loadingScanDao.addData(mOrderInfo);
-		dataList.add(mOrderInfo);
+		loadingScanDao.addData(orderInfo);
+		dataList.add(orderInfo);
 		commonAdapter.notifyDataSetChanged();
 
 		tvCount.setText(dataList.size() + "");
+		edtCargoId.setText("");
+	}
+
+	public void onStop(){
+		super.onStop();
+
+		MyApplication.getEventBus().unregister(this);
 	}
 }

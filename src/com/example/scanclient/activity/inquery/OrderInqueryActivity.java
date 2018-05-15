@@ -60,6 +60,7 @@ public class OrderInqueryActivity extends BaseActivity {
 	protected void onBaseCreate(Bundle savedInstanceState) {
 		setContentViewId(R.layout.activity_order_inquery);
 		ViewUtils.inject(this);
+		MyApplication.getEventBus().register(this);
 	}
 
 	@Override
@@ -119,6 +120,13 @@ public class OrderInqueryActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void onEventMainThread(Object event) {  
+
+		String billcode = event.toString();  
+		edtOrderId.setText(billcode);
+		inquery(null);
+	}  
 
 	public void selTime(View v){
 
@@ -220,5 +228,11 @@ public class OrderInqueryActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});
+	}
+	
+	public void onStop(){
+		super.onStop();
+
+		MyApplication.getEventBus().unregister(this);
 	}
 }

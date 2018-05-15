@@ -67,6 +67,7 @@ public class MainMenuActivity extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 
+		MyApplication.getEventBus().register(this);
 		ViewUtils.inject(this);
 
 		InitImageView();
@@ -87,6 +88,11 @@ public class MainMenuActivity extends FragmentActivity {
 		mContext = MainMenuActivity.this;
 		return super.onCreateView(name, context, attrs);
 	}
+	
+	public void onEventMainThread(Object event) {  
+
+		String billcode = event.toString();  
+	}  
 
 	/**
 	 * ≥ı ºªØ∂Øª≠

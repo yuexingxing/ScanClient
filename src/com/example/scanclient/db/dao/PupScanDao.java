@@ -155,6 +155,48 @@ public class PupScanDao {
 	}
 
 	/**
+	 * @param id
+	 * @return
+	 */
+	public List<OrderInfo> selectDataById(OrderInfo orderInfo) {
+
+		List<OrderInfo> list = new ArrayList<OrderInfo>();
+
+		db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+		String sql = "select * from " + DBHelper.TABLE_PupScan
+				+ " where " + DBHelper.OrderID + " = '" + orderInfo.getOrderID() + "'"
+				+ " and " + DBHelper.CargoID + " = '" + orderInfo.getCargoID() + "'"
+				+ " and " + DBHelper.Flag + " = 0";
+
+		Cursor cursor = db.rawQuery(sql, null);
+
+		while(cursor.moveToNext()) {
+
+			OrderInfo info = new OrderInfo();
+			info.setID(cursor.getString(cursor.getColumnIndex(DBHelper.ID)));
+			info.setOrderID(cursor.getString(cursor.getColumnIndex(DBHelper.OrderID)));
+			info.setBatchNo(cursor.getString(cursor.getColumnIndex(DBHelper.BatchNo)));
+			info.setCargoID(cursor.getString(cursor.getColumnIndex(DBHelper.CargoID)));
+			info.setCount(cursor.getString(cursor.getColumnIndex(DBHelper.Count)));
+			info.setWeight(cursor.getString(cursor.getColumnIndex(DBHelper.Weight)));
+			info.setRemark(cursor.getString(cursor.getColumnIndex(DBHelper.Remark)));
+			info.setScanTime(cursor.getString(cursor.getColumnIndex(DBHelper.ScanTime)));
+			info.setScanUserID(cursor.getString(cursor.getColumnIndex(DBHelper.ScanUserID)));
+			info.setCrtBillNo(cursor.getString(cursor.getColumnIndex(DBHelper.CrtBillNo)));
+			info.setFlag(cursor.getString(cursor.getColumnIndex(DBHelper.Flag)));
+
+			list.add(info);
+		}
+
+		if(cursor != null){
+			cursor.close();
+		}
+
+		return list;
+	}
+
+
+	/**
 	 * @param
 	 * @param n
 	 */
@@ -179,6 +221,35 @@ public class PupScanDao {
 		}
 
 		return flag;
+	}
+
+	/**
+	 * ¸ù¾Ýid²éÑ¯
+	 * @param id
+	 * @return
+	 */
+	public int checkData(OrderInfo info) {
+
+		int count = -1;
+		Cursor cursor = null;
+		String sql = "select * from " + DBHelper.TABLE_PupScan
+				+ " where " + DBHelper.OrderID + "  = '" + info.getOrderID() + "'"
+				+ " and " + DBHelper.CargoID + " = '" + info.getCargoID() + "'"
+				+ " and " + DBHelper.Flag + " = 0";
+		try{
+
+			db = DBHelper.SQLiteDBHelper.getWritableDatabase();
+			cursor = db.rawQuery(sql, null);
+			count = cursor.getCount();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(cursor != null){
+				cursor.close();
+			}
+		}
+
+		return count;
 	}
 
 

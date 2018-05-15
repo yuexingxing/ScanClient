@@ -2,6 +2,8 @@ package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
@@ -61,6 +63,7 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 	protected void onBaseCreate(Bundle savedInstanceState) {
 		setContentViewId(R.layout.activity_ti_huo_detail_scan);
 		ViewUtils.inject(this);
+		MyApplication.getEventBus().register(this);
 	}
 
 	@Override
@@ -117,6 +120,13 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		pupScanDao = new PupScanDao();
 		initDBData();
 	}
+	
+	public void onEventMainThread(Object event) {  
+
+		String billcode = event.toString();  
+		edtCargoId.setText(billcode);
+		save(null);
+	}  
 
 	/**
 	 * 从表中取数据
@@ -147,9 +157,9 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		}
 
 		final OrderInfo orderInfo = dataList.get(currPos);
-		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
+//		final PupHeaderDao pupHeaderDao = new PupHeaderDao();
 		
-		if(pupHeaderDao.checkData(orderId) < 1){
+		if(pupScanDao.checkData(orderInfo) < 1){
 //			CommandTools.showToast("本地表中没有数据");
 			
 			dataList.remove(currPos);
@@ -164,9 +174,9 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 					// TODO Auto-generated method stub
 					if(position == 0){
 
-						pupHeaderDao.deleteById(orderId);
+						new PupHeaderDao().deleteById(orderId);
 						new PupDetailDao().deleteById(orderId);
-						new PupScanDao().deleteById(orderInfo);
+						pupScanDao.deleteById(orderInfo);
 						CommandTools.showToast("删除成功");
 
 						initDBData();
@@ -262,9 +272,15 @@ public class TiHuoDetailScanActivity extends BaseActivity {
 		info.setRemark(edtRemark.getText().toString());
 		info.setScanTime(CommandTools.getTime());
 
-		pupScanDao.deleteById(info);
+//		pupScanDao.deleteById(info);
 		pupScanDao.addData(info);
 
 		initDBData();
+	}
+	
+	public void onStop(){
+		super.onStop();
+
+		MyApplication.getEventBus().unregister(this);
 	}
 }

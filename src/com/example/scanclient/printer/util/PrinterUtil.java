@@ -3,6 +3,7 @@ package com.example.scanclient.printer.util;
 import java.util.List;
 
 import com.example.scanclient.MyApplication;
+import com.example.scanclient.db.dao.PupScanDao;
 import com.example.scanclient.fragment.SettingFragment;
 import com.example.scanclient.info.OrderInfo;
 import com.example.scanclient.printer.JQPrinter;
@@ -17,68 +18,65 @@ public class PrinterUtil {
 
 	public static boolean printLabel(Context context, OrderInfo info, List<OrderInfo> dataList){
 
+		PupScanDao pupScanDao = new PupScanDao();
 		JQPrinter printer = SettingFragment.printer;
 		if(printer == null){
 			CommandTools.showToast("请检查打印机连接");
 			return false;
 		}
-		
+
 		if(!getPrinterState(context, printer)){
 			return false;
 		}
 
-		printer.jpl.page.start(0, 0, 576, 340, PAGE_ROTATE.x0);
-		//		printer.jpl.barcode.code128(ALIGN.CENTER, 0, 64, BAR_UNIT.x2, BAR_ROTATE.ANGLE_0, bar_str);//printer.jpl.barcode.code128(16, 0, 64, BAR_UNIT.x3, BAR_ROTATE.ANGLE_0, bar_str);
-		//	printer.jpl.barcode.PDF417(16, 68, 5, 3, 4, BAR_UNIT.x2, ROTATE.ROTATE_0, bar_str);
-		//		printer.jpl.text.drawOut(ALIGN.CENTER, 66, bar_str, 16, false, false, false, false, TEXT_ENLARGE.x2, TEXT_ENLARGE.x1, ROTATE.ROTATE_0);//printer.jpl.text.drawOut(96, 64, bar_str);
-		//	printer.jpl.barcode.QRCode(0, 120, 0, QRCODE_ECC.LEVEL_M, BAR_UNIT.x3, ROTATE.ROTATE_0, bar_str);
-
-
-		//		printer.jpl.graphic.line(new Point(8,96), new Point(568,96), 3);
-		//		printer.jpl.graphic.line(new Point(8, 160), new Point(568, 160), 3);
-		//		printer.jpl.graphic.line(new Point(8, 224), new Point(568, 224), 3);
-		//		printer.jpl.graphic.line(new Point(8, 288), new Point(568, 288), 3);
-		//
-		//		printer.jpl.graphic.line(new Point(8,96), new Point(8, 288), 3);
-		//		printer.jpl.graphic.line(new Point(568, 96), new Point(568, 288), 3);
-		//		printer.jpl.graphic.line(new Point(304, 96), new Point(304, 224), 3);
-		//		printer.jpl.graphic.line(new Point(456, 96), new Point(456, 160), 3);
-		//
-		//		printer.jpl.text.drawOut(14, 104, "杭州——" + "上海东", 24, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);			
-		//		printer.jpl.text.drawOut(320, 104, String.valueOf(1)+"/"+1, 48, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
-		//		printer.jpl.text.drawOut(464, 104, "特快", 48, true, true, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
-		//		printer.jpl.text.drawOut(14, 168, "上海济强电子科技有限公司", 24, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
-		//		printer.jpl.text.drawOut(320, 168, "张三", 24, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
-		//		printer.jpl.text.drawOut(320, 168+26, "021-61645760", 24, false, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
-		//		printer.jpl.text.drawOut(14, 232, "上海浦东金藏路258号2号楼2楼", 24, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);			
-		//		printer.jpl.text.drawOut(14, 296, "全速物流www.qs-express.com", 32, true, false, false, false, TEXT_ENLARGE.NORMAL, TEXT_ENLARGE.NORMAL, ROTATE.ROTATE_0);
+		printer.jpl.page.start(0, 0, 1000, 340, PAGE_ROTATE.x0);
 
 		int startY = 10;
 		int lineH = 30;//每行高度
-		
-		printer.jpl.text.drawOut(14, startY, "订单号: " + info.getOrderID());
-		printer.jpl.text.drawOut(14, startY+=lineH, CommandTools.getTime());
-		printer.jpl.text.drawOut(14, startY+=lineH, "");
 
+		printer.jpl.text.drawOut(14, startY, "订单号: " + info.getOrderID());
+		printer.jpl.text.drawOut(14, startY+=lineH, "条码");
+		printer.jpl.text.drawOut(300, startY, "数量");
+
+		StringBuilder sb = new StringBuilder();
 		int len = dataList.size();
 		for(int i=0; i<len; i++){
-			
+
 			OrderInfo orderInfo = dataList.get(i);
+			if(!sb.toString().contains(orderInfo.getCargoID())){
+				
+				List<OrderInfo> tempList = pupScanDao.selectDataById(orderInfo);
+				int tempLen = tempList.size();
+				for(int k=0; k<tempLen; k++){
+					
+					OrderInfo tempOrderInfo = tempList.get(k);
+					startY = startY + 30;
+					printer.jpl.text.drawOut(14, startY, tempOrderInfo.getCargoID());
+					printer.jpl.text.drawOut(300, startY, "1");
+				}
+				
+				startY = startY + 30;
+				printer.jpl.text.drawOut(50, startY, "小计");
+				printer.jpl.text.drawOut(300, startY, tempLen + "");
+				
+				sb.append(orderInfo.getCargoID()).append(",");
+			}
 			
-			startY = startY + 30;
-			printer.jpl.text.drawOut(14, startY, orderInfo.getCargoID());
-			printer.jpl.text.drawOut(300, startY, "1");
 		}
-		
-		printer.jpl.text.drawOut(14, startY+=lineH, "");
-		printer.jpl.text.drawOut(14, startY+=lineH, "合计: ");
+
+		printer.jpl.text.drawOut(300, startY+=lineH, "");
+		printer.jpl.text.drawOut(50, startY+=lineH, "合计: ");
 		printer.jpl.text.drawOut(300, startY, len + "");
+		
+		//打印空白页，方便撕纸
+		printer.jpl.text.drawOut(300, startY+=lineH, "");
+		printer.jpl.text.drawOut(300, startY+=lineH, "");
 
 		printer.jpl.page.end();
 		printer.jpl.page.print();
-//		printer.jpl.feedMarkOrGap(5);
-//		printer.jpl.feedNextLabelBegin();
-//		printer.jpl.feedMarkOrGap(0);//printer.jpl.feedNextLabelEnd(48);//printer.jpl.feedNextLabelBegin();
+		//		printer.jpl.feedMarkOrGap(5);
+		//		printer.jpl.feedNextLabelBegin();
+		//		printer.jpl.feedMarkOrGap(0);//printer.jpl.feedNextLabelEnd(48);//printer.jpl.feedNextLabelBegin();
 		int i = 0;
 		for(i=0;i<10;i++)
 		{
@@ -115,7 +113,7 @@ public class PrinterUtil {
 	}
 
 	public static boolean getPrinterState(Context context, JQPrinter printer){
-		
+
 		if( printer.getPortState() != PORT_STATE.PORT_OPEND)
 		{
 			Toast.makeText(context, "蓝牙错误", Toast.LENGTH_SHORT).show();

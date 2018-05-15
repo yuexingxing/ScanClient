@@ -2,6 +2,8 @@ package com.example.scanclient.activity.scan;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.scanclient.MyApplication;
 import com.example.scanclient.R;
 import com.example.scanclient.activity.BaseActivity;
 import com.example.scanclient.adapter.CommonAdapter;
@@ -45,12 +47,13 @@ public class GetOnInfoActivity extends BaseActivity {
 	private LoadingScanDao loadingScanDao = new LoadingScanDao();
 	private LoadingDetailDao loadingDetailDao = new LoadingDetailDao();
 	
-	private String actionName;
+	private String actionName;//11203609
 
 	@Override
 	protected void onBaseCreate(Bundle savedInstanceState) {
 		setContentViewId(R.layout.activity_get_on_info);
 		ViewUtils.inject(this);
+		MyApplication.getEventBus().register(this);
 	}
 
 	@Override
@@ -113,6 +116,13 @@ public class GetOnInfoActivity extends BaseActivity {
 
 		tvCount.setText(dataList.size() + "");
 	}
+	
+	public void onEventMainThread(Object event) {  
+
+		String billcode = event.toString();  
+		edtOrderId.setText(billcode);
+		save(null);
+	}  
 
 	public void toBack(View v){
 
@@ -234,5 +244,11 @@ public class GetOnInfoActivity extends BaseActivity {
 				tvCount.setText(dataList.size() + "");
 			}
 		});
+	}
+	
+	public void onStop(){
+		super.onStop();
+
+		MyApplication.getEventBus().unregister(this);
 	}
 }

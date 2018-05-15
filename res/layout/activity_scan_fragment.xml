@@ -82,5 +82,31 @@
             android:background="@drawable/shape_button"
             android:text="重打" />
     </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/scan_fragment_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button"
+            android:text="扫描比对" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:background="@drawable/shape_button"
+            android:text="重打" />
+    </LinearLayout>
 
 </LinearLayout>
